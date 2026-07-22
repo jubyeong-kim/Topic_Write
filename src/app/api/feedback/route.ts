@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
-import { generateMockFeedback, GrammarRuleInput, Problem, mockProblems } from '@/data/mockData';
+import { generateMockFeedback, GrammarRuleInput, mockProblems } from '@/data/mockData';
+import { Problem } from '@/types';
 import { getSupabase, isSupabaseConfigured } from '@/lib/supabase';
 
 export async function POST(request: Request) {
