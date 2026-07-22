@@ -1,16 +1,43 @@
 'use client';
 
 import { useState } from 'react';
-import { FeedbackResult, GrammarError, ContextIssue } from '@/types';
+import { FeedbackResult, GrammarError } from '@/types';
 
 interface FeedbackViewProps {
   feedback: FeedbackResult;
   originalContent: string;
+  sampleAnswer?: string;
 }
 
-export default function FeedbackView({ feedback, originalContent }: FeedbackViewProps) {
+type HighlightPart = { text: string; isError: boolean; error?: GrammarError };
+
+function highlightErrors(text: string, errors: GrammarError[]): HighlightPart[] {
+  if (errors.length === 0) return [{ text, isError: false }];
+
+  const sorted = [...errors].sort((a, b) => a.position.start - b.position.start);
+  const parts: HighlightPart[] = [];
+  let lastIndex = 0;
+
+  sorted.forEach((err) => {
+    if (err.position.start > lastIndex) {
+      parts.push({ text: text.slice(lastIndex, err.position.start), isError: false });
+    }
+    parts.push({ text: text.slice(err.position.start, err.position.end), isError: true, error: err });
+    lastIndex = err.position.end;
+  });
+
+  if (lastIndex < text.length) {
+    parts.push({ text: text.slice(lastIndex), isError: false });
+  }
+
+  return parts;
+}
+
+export default function FeedbackView({ feedback, originalContent, sampleAnswer }: FeedbackViewProps) {
   const [activeTab, setActiveTab] = useState<'auto' | 'grammar' | 'context'>('auto');
   const [selectedError, setSelectedError] = useState<GrammarError | null>(null);
+
+  const highlightedParts = highlightErrors(originalContent, feedback.grammarErrors);
 
   const tabs = [
     { id: 'auto' as const, label: '자동 수정', count: feedback.autoCorrections.length },
@@ -39,6 +66,70 @@ export default function FeedbackView({ feedback, originalContent }: FeedbackView
         </div>
         <div className="text-gray-600 mt-2">전체 점수</div>
       </div>
+
+      {/* 하이라이트 원문 */}
+      {feedback.grammarErrors.length > 0 && (
+        <div className="bg-white border border-red-200 rounded-xl p-4">
+          <h3 className="text-sm font-bold text-red-600 mb-3">
+            🔍 오류가 발견된 부분
+          </h3>
+          <div className="text-gray-700 whitespace-pre-wrap leading-relaxed">
+            {highlightedParts.map((part, i) =>
+              part.isError ? (
+                <span
+                  key={i}
+                  className="text-red-600 font-bold underline decoration-red-300 cursor-pointer hover:bg-red-50"
+                  onClick={() =>
+                    setSelectedError(
+                      selectedError?.id === part.error?.id ? null : part.error || null
+                    )
+                  }
+                  title="클릭하면 상세 설명을 확인할 수 있습니다"
+                >
+                  {part.text}
+                </span>
+              ) : (
+                <span key={i}>{part.text}</span>
+              )
+            )}
+          </div>
+          <p className="text-xs text-gray-400 mt-2">🔴 빨간색/볼드 = 문법 오류 (클릭 시 설명)</p>
+        </div>
+      )}
+
+      {/* 선택된 오류 팝업 */}
+      {selectedError && (
+        <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-sm font-bold text-yellow-800">
+              {selectedError.type}
+            </span>
+            <button
+              onClick={() => setSelectedError(null)}
+              className="text-gray-400 hover:text-gray-600"
+            >
+              ✕
+            </button>
+          </div>
+          <div className="flex items-center gap-2 mb-3 text-sm">
+            <span className="text-red-500 line-through font-medium">
+              {selectedError.original}
+            </span>
+            <span className="text-gray-400">→</span>
+            <span className="text-green-600 font-medium">
+              {selectedError.corrected}
+            </span>
+          </div>
+          <div className="bg-white rounded-lg p-3 mb-2">
+            <p className="text-sm font-medium text-gray-700 mb-1">📖 설명</p>
+            <p className="text-sm text-gray-600">{selectedError.explanation}</p>
+          </div>
+          <div className="bg-blue-50 rounded-lg p-3">
+            <p className="text-sm font-medium text-blue-700 mb-1">💡 제안</p>
+            <p className="text-sm text-blue-600">{selectedError.suggestion}</p>
+          </div>
+        </div>
+      )}
 
       {/* 탭 */}
       <div className="flex border-b border-gray-200">
@@ -103,7 +194,7 @@ export default function FeedbackView({ feedback, originalContent }: FeedbackView
                     <div className="flex items-center gap-2">
                       <span className="text-yellow-600 font-medium">{error.type}</span>
                       <span className="text-sm text-gray-500">|</span>
-                      <span className="text-red-500 line-through text-sm">{error.original}</span>
+                      <span className="text-red-500 line-through text-sm font-bold">{error.original}</span>
                       <span className="text-gray-400">→</span>
                       <span className="text-green-600 font-medium text-sm">{error.corrected}</span>
                     </div>
@@ -111,7 +202,6 @@ export default function FeedbackView({ feedback, originalContent }: FeedbackView
                       {selectedError?.id === error.id ? '▲' : '▼'}
                     </span>
                   </div>
-                  
                   {selectedError?.id === error.id && (
                     <div className="mt-3 pt-3 border-t border-yellow-200">
                       <div className="bg-white rounded-lg p-3">
@@ -163,13 +253,37 @@ export default function FeedbackView({ feedback, originalContent }: FeedbackView
         )}
       </div>
 
+      {/* 모범답안 */}
+      {sampleAnswer && (
+        <details className="bg-green-50 rounded-lg" open>
+          <summary className="p-4 cursor-pointer text-green-800 font-bold">
+            💡 모범답안 보기
+          </summary>
+          <div className="px-4 pb-4">
+            <p className="text-sm text-green-700 whitespace-pre-wrap leading-relaxed">
+              {sampleAnswer}
+            </p>
+          </div>
+        </details>
+      )}
+
       {/* 원문 보기 */}
       <details className="bg-gray-50 rounded-lg">
         <summary className="p-4 cursor-pointer text-gray-700 font-medium">
           📄 원문 보기
         </summary>
         <div className="px-4 pb-4">
-          <p className="text-gray-600 whitespace-pre-wrap">{originalContent}</p>
+          <div className="text-gray-600 whitespace-pre-wrap leading-relaxed">
+            {highlightedParts.map((part, i) =>
+              part.isError ? (
+                <span key={i} className="text-red-600 font-bold underline decoration-red-300">
+                  {part.text}
+                </span>
+              ) : (
+                <span key={i}>{part.text}</span>
+              )
+            )}
+          </div>
         </div>
       </details>
     </div>

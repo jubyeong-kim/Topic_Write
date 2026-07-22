@@ -56,7 +56,7 @@ function ProblemContent() {
         body: JSON.stringify({ answerId: answerData.id, content }),
       });
 
-      router.push(`/feedback/${answerData.id}?content=${encodeURIComponent(content)}&type=${selectedProblem.type}`);
+      router.push(`/feedback/${answerData.id}?content=${encodeURIComponent(content)}&type=${selectedProblem.type}&problemId=${selectedProblem.id}`);
     } catch (error) {
       console.error('Submit error:', error);
     } finally {
@@ -83,7 +83,7 @@ function ProblemContent() {
         body: JSON.stringify({ answerId: answerData.id, content: mockContent }),
       });
 
-      router.push(`/feedback/${answerData.id}?content=${encodeURIComponent(mockContent)}&type=${selectedProblem.type}`);
+      router.push(`/feedback/${answerData.id}?content=${encodeURIComponent(mockContent)}&type=${selectedProblem.type}&problemId=${selectedProblem.id}`);
     } catch (error) {
       console.error('Mock submit error:', error);
     } finally {
@@ -200,18 +200,6 @@ function ProblemContent() {
                           {selectedProblem.requirements}
                         </p>
                       </div>
-                    )}
-                    {selectedProblem.sample_answer && (
-                      <details className="mt-4 bg-green-50 rounded-lg">
-                        <summary className="p-4 cursor-pointer text-green-800 font-medium text-sm">
-                          💡 모범답안 보기
-                        </summary>
-                        <div className="px-4 pb-4">
-                          <p className="text-sm text-green-700 whitespace-pre-wrap leading-relaxed">
-                            {selectedProblem.sample_answer}
-                          </p>
-                        </div>
-                      </details>
                     )}
                   </div>
 

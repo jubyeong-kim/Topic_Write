@@ -3,7 +3,7 @@
 import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useParams, useSearchParams } from 'next/navigation';
 import FeedbackView from '@/components/FeedbackView';
-import { FeedbackResult } from '@/types';
+import { FeedbackResult, Problem } from '@/types';
 
 function FeedbackContent() {
   const router = useRouter();
@@ -12,15 +12,32 @@ function FeedbackContent() {
   const answerId = params.id as string;
   const content = searchParams.get('content') || '';
   const problemType = searchParams.get('type') || 'essay';
+  const problemId = searchParams.get('problemId') || '';
 
   const [feedback, setFeedback] = useState<FeedbackResult | null>(null);
+  const [sampleAnswer, setSampleAnswer] = useState<string>('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (content) {
       generateFeedback();
     }
-  }, [content]);
+    if (problemId) {
+      fetchProblem();
+    }
+  }, [content, problemId]);
+
+  const fetchProblem = async () => {
+    try {
+      const res = await fetch(`/api/problems/${problemId}`);
+      const data: Problem = await res.json();
+      if (data.sample_answer) {
+        setSampleAnswer(data.sample_answer);
+      }
+    } catch (e) {
+      console.error('Failed to fetch problem:', e);
+    }
+  };
 
   const generateFeedback = async () => {
     try {
@@ -61,29 +78,34 @@ function FeedbackContent() {
             <p className="mt-4 text-gray-500">피드백을 분석하는 중...</p>
           </div>
         ) : feedback ? (
-          <div className="bg-white rounded-xl shadow-sm p-6">
-            <FeedbackView feedback={feedback} originalContent={content} />
-          </div>
+          <>
+            <div className="bg-white rounded-xl shadow-sm p-6">
+              <FeedbackView
+                feedback={feedback}
+                originalContent={content}
+                sampleAnswer={sampleAnswer}
+              />
+            </div>
+            <div className="mt-6 flex gap-4">
+              <button
+                onClick={() => router.push('/')}
+                className="flex-1 bg-gray-200 text-gray-700 py-3 rounded-lg font-medium hover:bg-gray-300 transition-colors"
+              >
+                메인으로 돌아가기
+              </button>
+              <button
+                onClick={() => router.back()}
+                className="flex-1 bg-blue-500 text-white py-3 rounded-lg font-medium hover:bg-blue-600 transition-colors"
+              >
+                다시 풀기
+              </button>
+            </div>
+          </>
         ) : (
           <div className="text-center py-12">
             <p className="text-gray-500">피드백을 불러올 수 없습니다.</p>
           </div>
         )}
-
-        <div className="mt-6 flex gap-4">
-          <button
-            onClick={() => router.push('/')}
-            className="flex-1 bg-gray-200 text-gray-700 py-3 rounded-lg font-medium hover:bg-gray-300 transition-colors"
-          >
-            메인으로 돌아가기
-          </button>
-          <button
-            onClick={() => router.back()}
-            className="flex-1 bg-blue-500 text-white py-3 rounded-lg font-medium hover:bg-blue-600 transition-colors"
-          >
-            다시 풀기
-          </button>
-        </div>
       </main>
     </div>
   );
