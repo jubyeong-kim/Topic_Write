@@ -9,7 +9,8 @@ import { getMockTestAnswer } from '@/app/api/answers/route';
 function ProblemContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const problemType = searchParams.get('type') || 'essay';
+  const problemType = searchParams.get('type') || 'fill_blank';
+  const typeNum = searchParams.get('num') || '51';
 
   const [problems, setProblems] = useState<Problem[]>([]);
   const [selectedProblem, setSelectedProblem] = useState<Problem | null>(null);
@@ -18,13 +19,15 @@ function ProblemContent() {
 
   useEffect(() => {
     fetchProblems();
-  }, [problemType]);
+  }, [problemType, typeNum]);
 
   const fetchProblems = async () => {
     try {
       const response = await fetch('/api/problems');
       const data = await response.json();
-      const filtered = data.filter((p: Problem) => p.type === problemType);
+      const filtered = data.filter(
+        (p: Problem) => p.type === problemType && p.type_number === parseInt(typeNum)
+      );
       setProblems(filtered);
       if (filtered.length > 0) {
         setSelectedProblem(filtered[0]);
@@ -38,33 +41,24 @@ function ProblemContent() {
 
   const handleSubmit = async (content: string) => {
     if (!selectedProblem || submitting) return;
-
     setSubmitting(true);
     try {
-      const answerResponse = await fetch('/api/answers', {
+      const answerRes = await fetch('/api/answers', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          problemId: selectedProblem.id,
-          content,
-          isMockData: false,
-        }),
+        body: JSON.stringify({ problemId: selectedProblem.id, content, isMockData: false }),
       });
-      const answerData = await answerResponse.json();
+      const answerData = await answerRes.json();
 
-      const feedbackResponse = await fetch('/api/feedback', {
+      await fetch('/api/feedback', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          answerId: answerData.id,
-          content,
-        }),
+        body: JSON.stringify({ answerId: answerData.id, content }),
       });
-      await feedbackResponse.json();
 
-      router.push(`/feedback/${answerData.id}?content=${encodeURIComponent(content)}`);
+      router.push(`/feedback/${answerData.id}?content=${encodeURIComponent(content)}&type=${selectedProblem.type}`);
     } catch (error) {
-      console.error('Failed to submit answer:', error);
+      console.error('Submit error:', error);
     } finally {
       setSubmitting(false);
     }
@@ -72,35 +66,26 @@ function ProblemContent() {
 
   const handleMockSubmit = async (content: string) => {
     if (!selectedProblem || submitting) return;
-
     setSubmitting(true);
     try {
-      const mockContent = content || getMockTestAnswer();
+      const mockContent = content || getMockTestAnswer(selectedProblem.type);
 
-      const answerResponse = await fetch('/api/answers', {
+      const answerRes = await fetch('/api/answers', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          problemId: selectedProblem.id,
-          content: mockContent,
-          isMockData: true,
-        }),
+        body: JSON.stringify({ problemId: selectedProblem.id, content: mockContent, isMockData: true }),
       });
-      const answerData = await answerResponse.json();
+      const answerData = await answerRes.json();
 
-      const feedbackResponse = await fetch('/api/feedback', {
+      await fetch('/api/feedback', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          answerId: answerData.id,
-          content: mockContent,
-        }),
+        body: JSON.stringify({ answerId: answerData.id, content: mockContent }),
       });
-      await feedbackResponse.json();
 
-      router.push(`/feedback/${answerData.id}?content=${encodeURIComponent(mockContent)}`);
+      router.push(`/feedback/${answerData.id}?content=${encodeURIComponent(mockContent)}&type=${selectedProblem.type}`);
     } catch (error) {
-      console.error('Failed to submit mock answer:', error);
+      console.error('Mock submit error:', error);
     } finally {
       setSubmitting(false);
     }
@@ -108,13 +93,20 @@ function ProblemContent() {
 
   const getTypeLabel = (type: string) => {
     const labels: Record<string, string> = {
-      essay: '글쓰기',
-      description: '설명하기',
-      story: '이야기하기',
-      opinion: '의견쓰기',
-      debate: '토론하기',
+      fill_blank: '빈칸 채우기',
+      data_description: '자료 설명',
+      essay: '논설문',
     };
     return labels[type] || type;
+  };
+
+  const getTypeColor = (type: string) => {
+    const colors: Record<string, string> = {
+      fill_blank: 'bg-blue-100 text-blue-700',
+      data_description: 'bg-orange-100 text-orange-700',
+      essay: 'bg-purple-100 text-purple-700',
+    };
+    return colors[type] || 'bg-gray-100 text-gray-700';
   };
 
   if (loading) {
@@ -133,24 +125,14 @@ function ProblemContent() {
       <header className="bg-white shadow-sm">
         <div className="max-w-4xl mx-auto px-4 py-4">
           <div className="flex items-center gap-4">
-            <button
-              onClick={() => router.push('/')}
-              className="text-gray-500 hover:text-gray-700"
-            >
+            <button onClick={() => router.push('/')} className="text-gray-500 hover:text-gray-700">
               ← 뒤로
             </button>
             <div>
               <h1 className="text-xl font-bold text-gray-800">
-                {problemType === 'essay' && '✍️'}
-                {problemType === 'description' && '📋'}
-                {problemType === 'story' && '📖'}
-                {problemType === 'opinion' && '💬'}
-                {problemType === 'debate' && '🎭'}
-                {' '}{getTypeLabel(problemType)}
+                {typeNum}번 - {getTypeLabel(problemType)}
               </h1>
-              <p className="text-sm text-gray-500">
-                TOPIK II 쓰기 {problems.length > 0 ? `${problems[0].type_number}번` : ''}
-              </p>
+              <p className="text-sm text-gray-500">TOPIK II 쓰기</p>
             </div>
           </div>
         </div>
@@ -163,6 +145,7 @@ function ProblemContent() {
           </div>
         ) : (
           <div className="grid gap-6 md:grid-cols-3">
+            {/* 문제 선택 */}
             <div className="md:col-span-1">
               <h3 className="text-sm font-medium text-gray-700 mb-3">문제 선택</h3>
               <div className="space-y-2">
@@ -185,18 +168,24 @@ function ProblemContent() {
               </div>
             </div>
 
+            {/* 문제 상세 및 답변 입력 */}
             <div className="md:col-span-2">
               {selectedProblem && (
                 <div className="space-y-6">
+                  {/* 문제 내용 */}
                   <div className="bg-white rounded-xl shadow-sm p-6">
                     <div className="flex items-center justify-between mb-4">
-                      <h2 className="text-lg font-bold text-gray-800">
-                        문제 {selectedProblem.id}
-                      </h2>
+                      <span className={`text-xs font-medium px-3 py-1 rounded-full ${getTypeColor(selectedProblem.type)}`}>
+                        {getTypeLabel(selectedProblem.type)} | {selectedProblem.points}점
+                      </span>
                       <div className="flex items-center gap-2 text-sm text-gray-500">
                         <span>⏱️ {selectedProblem.time_limit}분</span>
-                        <span>|</span>
-                        <span>난이도: {'★'.repeat(selectedProblem.difficulty)}</span>
+                        {selectedProblem.word_limit && (
+                          <>
+                            <span>|</span>
+                            <span>📄 {selectedProblem.word_limit.min}~{selectedProblem.word_limit.max}자</span>
+                          </>
+                        )}
                       </div>
                     </div>
                     <div className="bg-gray-50 rounded-lg p-4 mb-4">
@@ -206,14 +195,27 @@ function ProblemContent() {
                     </div>
                     {selectedProblem.requirements && (
                       <div className="bg-blue-50 rounded-lg p-4">
-                        <h3 className="text-sm font-medium text-blue-800 mb-2">요구사항</h3>
+                        <h3 className="text-sm font-medium text-blue-800 mb-2">평가 기준</h3>
                         <p className="text-sm text-blue-700 whitespace-pre-wrap">
                           {selectedProblem.requirements}
                         </p>
                       </div>
                     )}
+                    {selectedProblem.sample_answer && (
+                      <details className="mt-4 bg-green-50 rounded-lg">
+                        <summary className="p-4 cursor-pointer text-green-800 font-medium text-sm">
+                          💡 모범답안 보기
+                        </summary>
+                        <div className="px-4 pb-4">
+                          <p className="text-sm text-green-700 whitespace-pre-wrap leading-relaxed">
+                            {selectedProblem.sample_answer}
+                          </p>
+                        </div>
+                      </details>
+                    )}
                   </div>
 
+                  {/* 답변 입력 */}
                   <div className="bg-white rounded-xl shadow-sm p-6">
                     <h3 className="text-lg font-bold text-gray-800 mb-4">답변 작성</h3>
                     <AnswerForm

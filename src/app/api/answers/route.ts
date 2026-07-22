@@ -67,7 +67,8 @@ export async function GET() {
   return NextResponse.json(answers);
 }
 
-export function getMockTestAnswer(): string {
-  const randomIndex = Math.floor(Math.random() * mockTestAnswers.length);
-  return mockTestAnswers[randomIndex];
+export function getMockTestAnswer(type: string): string {
+  const answers = mockTestAnswers[type] || mockTestAnswers['essay'] || [];
+  const randomIndex = Math.floor(Math.random() * answers.length);
+  return answers[randomIndex];
 }

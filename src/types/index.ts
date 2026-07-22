@@ -1,12 +1,15 @@
 export interface Problem {
   id: string;
-  type: 'essay' | 'description' | 'story' | 'opinion' | 'debate';
+  type: 'fill_blank' | 'data_description' | 'essay';
   type_number: number;
   prompt: string;
   requirements: string;
   sample_answer?: string;
+  grading_criteria?: string;
   difficulty: number;
   time_limit: number;
+  word_limit?: { min: number; max: number };
+  points?: number;
 }
 
 export interface Answer {
@@ -44,7 +47,7 @@ export interface GrammarError {
 }
 
 export interface ContextIssue {
-  type: 'flow' | 'coherence' | 'transition' | 'length';
+  type: 'flow' | 'coherence' | 'transition' | 'length' | 'repetition';
   description: string;
   suggestion: string;
   affectedText: string;
@@ -55,6 +58,8 @@ export interface ProblemType {
   typeNumber: number;
   name: string;
   description: string;
+  points: number;
+  wordLimit?: string;
   icon: string;
   color: string;
 }

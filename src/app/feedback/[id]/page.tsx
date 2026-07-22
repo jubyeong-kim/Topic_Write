@@ -1,16 +1,17 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useParams, useSearchParams } from 'next/navigation';
 import FeedbackView from '@/components/FeedbackView';
 import { FeedbackResult } from '@/types';
 
-export default function FeedbackPage() {
+function FeedbackContent() {
   const router = useRouter();
   const params = useParams();
   const searchParams = useSearchParams();
   const answerId = params.id as string;
   const content = searchParams.get('content') || '';
+  const problemType = searchParams.get('type') || 'essay';
 
   const [feedback, setFeedback] = useState<FeedbackResult | null>(null);
   const [loading, setLoading] = useState(true);
@@ -26,10 +27,7 @@ export default function FeedbackPage() {
       const response = await fetch('/api/feedback', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          answerId,
-          content,
-        }),
+        body: JSON.stringify({ answerId, content, type: problemType }),
       });
       const data = await response.json();
       setFeedback(data);
@@ -42,14 +40,10 @@ export default function FeedbackPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      {/* 헤더 */}
       <header className="bg-white shadow-sm">
         <div className="max-w-4xl mx-auto px-4 py-4">
           <div className="flex items-center gap-4">
-            <button
-              onClick={() => router.push('/')}
-              className="text-gray-500 hover:text-gray-700"
-            >
+            <button onClick={() => router.push('/')} className="text-gray-500 hover:text-gray-700">
               ← 뒤로
             </button>
             <div>
@@ -60,7 +54,6 @@ export default function FeedbackPage() {
         </div>
       </header>
 
-      {/* 메인 콘텐츠 */}
       <main className="max-w-4xl mx-auto px-4 py-8">
         {loading ? (
           <div className="text-center py-12">
@@ -77,7 +70,6 @@ export default function FeedbackPage() {
           </div>
         )}
 
-        {/* 하단 버튼 */}
         <div className="mt-6 flex gap-4">
           <button
             onClick={() => router.push('/')}
@@ -94,5 +86,22 @@ export default function FeedbackPage() {
         </div>
       </main>
     </div>
+  );
+}
+
+export default function FeedbackPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto"></div>
+            <p className="mt-4 text-gray-500">로딩 중...</p>
+          </div>
+        </div>
+      }
+    >
+      <FeedbackContent />
+    </Suspense>
   );
 }

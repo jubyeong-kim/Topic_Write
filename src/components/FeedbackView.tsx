@@ -67,8 +67,9 @@ export default function FeedbackView({ feedback, originalContent }: FeedbackView
         {activeTab === 'auto' && (
           <div className="space-y-3">
             {feedback.autoCorrections.length === 0 ? (
-              <div className="text-center py-8 text-gray-500">
-                자동 수정이 필요한 부분이 없습니다.
+              <div className="text-center py-8">
+                <div className="text-3xl mb-2">✅</div>
+                <p className="text-gray-600 font-medium">문법적으로 자연스러운 표현입니다!</p>
               </div>
             ) : (
               feedback.autoCorrections.map((correction, index) => (
@@ -87,8 +88,9 @@ export default function FeedbackView({ feedback, originalContent }: FeedbackView
         {activeTab === 'grammar' && (
           <div className="space-y-3">
             {feedback.grammarErrors.length === 0 ? (
-              <div className="text-center py-8 text-gray-500">
-                문법 오류가 없습니다.
+              <div className="text-center py-8">
+                <div className="text-3xl mb-2">✅</div>
+                <p className="text-gray-600 font-medium">지적할 문법 오류가 없습니다!</p>
               </div>
             ) : (
               feedback.grammarErrors.map((error) => (
@@ -131,24 +133,27 @@ export default function FeedbackView({ feedback, originalContent }: FeedbackView
         {activeTab === 'context' && (
           <div className="space-y-3">
             {feedback.contextIssues.length === 0 ? (
-              <div className="text-center py-8 text-gray-500">
-                맥락/흐름 문제가 없습니다.
+              <div className="text-center py-8">
+                <div className="text-3xl mb-2">✅</div>
+                <p className="text-gray-600 font-medium">글의 흐름이 자연스럽습니다!</p>
+                <p className="text-sm text-gray-400 mt-1">접속사 사용과 문장 전환이 적절합니다.</p>
               </div>
             ) : (
               feedback.contextIssues.map((issue, index) => (
-                <div key={index} className="bg-purple-50 rounded-lg p-4">
+                <div key={index} className="bg-blue-50 rounded-lg p-4">
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="text-purple-600 font-medium capitalize">
-                      {issue.type === 'flow' && '흐름'}
-                      {issue.type === 'coherence' && '일관성'}
-                      {issue.type === 'transition' && '전환'}
-                      {issue.type === 'length' && '분량'}
+                    <span className="text-blue-600 font-medium">
+                      {issue.type === 'flow' && '📝 흐름'}
+                      {issue.type === 'coherence' && '📝 일관성'}
+                      {issue.type === 'transition' && '🔗 연결 표현'}
+                      {issue.type === 'length' && '📄 분량'}
+                      {issue.type === 'repetition' && '🔄 반복'}
                     </span>
                   </div>
                   <p className="text-sm text-gray-700 mb-2">{issue.description}</p>
                   {issue.suggestion && (
                     <div className="bg-white rounded-lg p-3">
-                      <p className="text-sm text-blue-600">{issue.suggestion}</p>
+                      <p className="text-sm text-blue-600">💡 {issue.suggestion}</p>
                     </div>
                   )}
                 </div>

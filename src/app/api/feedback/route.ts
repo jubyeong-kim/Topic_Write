@@ -4,10 +4,10 @@ import { getSupabase, isSupabaseConfigured } from '@/lib/supabase';
 
 export async function POST(request: Request) {
   const body = await request.json();
-  const { answerId, content } = body;
+  const { answerId, content, type = 'essay' } = body;
 
   // 규칙 기반 피드백 생성
-  const feedback = generateMockFeedback(content);
+  const feedback = generateMockFeedback(content, type);
 
   // Supabase가 설정되어 있으면 DB에 저장
   if (isSupabaseConfigured()) {

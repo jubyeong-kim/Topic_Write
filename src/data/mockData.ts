@@ -2,110 +2,213 @@ import { Problem, ProblemType, FeedbackResult } from '@/types';
 
 export const problemTypes: ProblemType[] = [
   {
-    type: 'essay',
-    typeNumber: 54,
-    name: '글쓰기',
-    description: '제시된 주제에 대해 자신의 생각을 논리적으로 서술합니다.',
-    icon: '✍️',
+    type: 'fill_blank',
+    typeNumber: 51,
+    name: '빈칸 채우기',
+    description: '제시된 글을 읽고 빈칸에 들어갈 알맞은 문장을 한 문장으로 쓰시오.',
+    points: 10,
+    icon: '📝',
     color: 'bg-blue-500',
   },
   {
-    type: 'description',
-    typeNumber: 55,
-    name: '설명하기',
-    description: '제시된 상황이나 대상을 구체적으로 설명합니다.',
-    icon: '📋',
+    type: 'fill_blank',
+    typeNumber: 52,
+    name: '빈칸 채우기',
+    description: '제시된 글을 읽고 빈칸에 들어갈 알맞은 문장을 한 문장으로 쓰시오.',
+    points: 10,
+    icon: '📝',
     color: 'bg-green-500',
   },
   {
-    type: 'story',
-    typeNumber: 56,
-    name: '이야기하기',
-    description: '제시된 상황을 바탕으로 이야기를 구성합니다.',
-    icon: '📖',
-    color: 'bg-purple-500',
-  },
-  {
-    type: 'opinion',
-    typeNumber: 57,
-    name: '의견쓰기',
-    description: '제시된 문제에 대한 자신의 의견을 제시합니다.',
-    icon: '💬',
+    type: 'data_description',
+    typeNumber: 53,
+    name: '자료 설명',
+    description: '제시된 표나 그래프의 내용을 서술하시오.',
+    points: 30,
+    wordLimit: '200~300자',
+    icon: '📊',
     color: 'bg-orange-500',
   },
   {
-    type: 'debate',
-    typeNumber: 58,
-    name: '토론하기',
-    description: '제시된 주제에 대해 찬반 논거를 제시합니다.',
-    icon: '🎭',
-    color: 'bg-red-500',
+    type: 'essay',
+    typeNumber: 54,
+    name: '논설문',
+    description: '제시된 주제에 대해 자신의 생각을 논리적으로 서술하시오.',
+    points: 50,
+    wordLimit: '600~700자',
+    icon: '✍️',
+    color: 'bg-purple-500',
   },
 ];
 
 export const mockProblems: Problem[] = [
+  // ==========================================
+  // 51번 빈칸 채우기
+  // ==========================================
   {
-    id: '1',
+    id: '51-1',
+    type: 'fill_blank',
+    type_number: 51,
+    points: 10,
+    prompt:
+      '다음을 읽고 ( ㄱ ) 과 ( ㄴ ) 에 들어갈 말을 각각 한 문장으로 쓰시오. (10점)\n\n현대 사회에서 정보의 양이 급격히 증가하면서, 사람들은 자신에게 필요한 정보를 정확하게 구분하는 능력이 점점 더 중요해지고 있다. 인터넷이나 소셜 미디어를 통해 하루에도 수많은 정보가 쏟아지는데, ( ㄱ ). 그래서 사람들은 정보의 신뢰성을 판단하는 안목이 필요하다. ( ㄴ ).',
+    requirements:
+      '( ㄱ ) : 정보가 쏟아지는 상황에서 어떤 문제가 발생하는지 설명하시오.\n( ㄴ ) : 정보의 신뢰성을 판단하는 방법을 한 문장으로 쓰시오.',
+    sample_answer:
+      '(ㄱ) 모든 정보를 다 확인하는 것은 불가능하기 때문에 자신에게 필요한 정보를 선별하는 것이 중요하다.\n(ㄴ) 출처가 명확한지 확인하고 여러 정보를 비교하는 것이 바람직하다.',
+    difficulty: 2,
+    time_limit: 10,
+  },
+  {
+    id: '51-2',
+    type: 'fill_blank',
+    type_number: 51,
+    points: 10,
+    prompt:
+      '다음을 읽고 ( ㄱ ) 과 ( ㄴ ) 에 들어갈 말을 각각 한 문장으로 쓰시오. (10점)\n\n우리는 매일 다양한 사람들과 대화를 나눈다. 좋은 대화는 서로의 관계를 발전시키는 데 큰 도움이 된다. ( ㄱ ). 반대로 상대방의 말을 제대로 듣지 않으면 오해가 생길 수 있다. ( ㄴ ).',
+    requirements:
+      '( ㄱ ) : 좋은 대화가 관계에 미치는 긍정적 영향을 설명하시오.\n( ㄴ ) : 대화에서 경청이 중요한 이유를 한 문장으로 쓰시오.',
+    sample_answer:
+      '(ㄱ) 서로의 생각과 감정을 이해할 수 있어 신뢰가 쌓이고 관계가 깊어진다.\n(ㄴ) 경청은 상대방에 대한 존중을 보여주는 것이므로 대화의 기본이 된다.',
+    difficulty: 2,
+    time_limit: 10,
+  },
+
+  // ==========================================
+  // 52번 빈칸 채우기
+  // ==========================================
+  {
+    id: '52-1',
+    type: 'fill_blank',
+    type_number: 52,
+    points: 10,
+    prompt:
+      '다음을 읽고 ( ㄱ ) 과 ( ㄴ ) 에 들어갈 말을 각각 한 문장으로 쓰시오. (10점)\n\n요즘은 혼자 식사하는 혼밥 인구가 늘고 있다. 혼자 밥을 먹는 것이 편안한 사람들도 있지만, ( ㄱ ). 이런 사람들을 위해 최근 혼자でも 편안하게 식사할 수 있는 혼밥 전문 식당이 생기고 있다. ( ㄴ ).',
+    requirements:
+      '( ㄱ ) : 혼밥이 불편한 사람들의 심리를 설명하시오.\n( ㄴ ) : 혼밥 전문 식장의 장점을 한 문장으로 쓰시오.',
+    sample_answer:
+      '(ㄱ) 혼자서 밥을 먹으면 외롭거나 어색함을 느끼는 사람이 많다.\n(ㄴ) 혼자서도 부담 없이 식사할 수 있는 공간을 제공하여 편안한 식사를 돕는다.',
+    difficulty: 2,
+    time_limit: 10,
+  },
+  {
+    id: '52-2',
+    type: 'fill_blank',
+    type_number: 52,
+    points: 10,
+    prompt:
+      '다음을 읽고 ( ㄱ ) 과 ( ㄴ ) 에 들어갈 말을 각각 한 문장으로 쓰시오. (10점)\n\n한국의 전통 문화를 지키기 위한 노력이 활발해지고 있다. 예를 들어 한복을 입는 사람들이 늘고 있고, 전통 명절 문화를 체험하는 프로그램도 인기를 끌고 있다. ( ㄱ ). 그러나 젊은 층 사이에서는 전통 문화에 대한 관심이 여전히 부족하다는 의견도 있다. ( ㄴ ).',
+    requirements:
+      '( ㄱ ) : 전통 문화 지지 활동이 늘어나는 이유를 설명하시오.\n( ㄴ ) : 젊은 층의 관심 부족 문제를 해결하기 위한 방법을 한 문장으로 쓰시오.',
+    sample_answer:
+      '(ㄱ) 정부와 지방자치단체의 지원과 SNS를 통한 홍보가 효과를 거두고 있기 때문이다.\n(ㄴ) 학교 교육이나 체험 활동을 통해 전통 문화의 가치를 자연스럽게 느끼게 해야 한다.',
+    difficulty: 2,
+    time_limit: 10,
+  },
+
+  // ==========================================
+  // 53번 자료 설명 (표/그래프 서술)
+  // ==========================================
+  {
+    id: '53-1',
+    type: 'data_description',
+    type_number: 53,
+    points: 30,
+    prompt:
+      '다음은 2020년부터 2023년까지 한국의 온라인 쇼핑 거래액 변화에 대한 자료이다. 이 내용을 200~300자의 글로 쓰시오. 단, 글의 제목은 쓰지 마시오. (30점)\n\n| 연도 | 거래액(조 원) | 전년 대비 증가율 |\n|------|-------------|----------------|\n| 2020 | 156         | 24.3%          |\n| 2021 | 182         | 16.7%          |\n| 2022 | 198         | 8.8%           |\n| 2023 | 210         | 6.1%           |',
+    requirements:
+      '• 자료에 나타난 주요 특징을 서술하시오.\n• 증가율 변화의 추세를 설명하시오.\n• 적절한 연결 표현을 사용하시오.',
+    sample_answer:
+      '한국의 온라인 쇼핑 거래액은 2020년 156조 원에서 2023년 210조 원으로 꾸준히 증가하였다. 특히 2020년에는 전년 대비 24.3%의 높은 증가율을 보였는데, 이는 코로나19로 인해 비대면 쇼핑이 크게 확대된 결과로 보인다. 그러나 2021년에는 16.7%, 2022년에는 8.8%, 2023년에는 6.1%로 증가율이 지속적으로 낮아지는 추세를 보이고 있다. 이러한 추세는 온라인 쇼핑 시장이 포화 상태에 근접하고 있음을 시사한다. 따라서 향후 온라인 쇼핑 업체들은 새로운 성장 동력을 모색해야 할 것으로 보인다.',
+    difficulty: 3,
+    time_limit: 15,
+    word_limit: { min: 200, max: 300 },
+  },
+  {
+    id: '53-2',
+    type: 'data_description',
+    type_number: 53,
+    points: 30,
+    prompt:
+      '다음은 인주시의 인구 변화에 대한 자료이다. 이 내용을 200~300자의 글로 쓰시오. 단, 글의 제목은 쓰지 마시오. (30점)\n\n| 구분 | 2010년 | 2020년 | 변화 |\n|------|--------|--------|------|\n| 총인구 | 50만 명 | 48만 명 | -2만 명 |\n| 20~30대 | 18만 명 | 12만 명 | -6만 명 |\n| 65세 이상 | 7만 명 | 14만 명 | +7만 명 |\n| 1인 가구 비율 | 20% | 38% | +18%p |',
+    requirements:
+      '• 인구 변화의 주요 특징을 서술하시오.\n• 변화의 원인을 분석하시오.\n• 200~300자로 서술하시오.',
+    sample_answer:
+      '인주시의 인구는 2010년 50만 명에서 2020년 48만 명으로 2만 명 감소하였다. 가장 두드러진 변화는 연령대별 인구 구성의 변화이다. 20~30대 인구는 18만 명에서 12만 명으로 6만 명 감소한 반면, 65세 이상 고령 인구는 7만 명에서 14만 명으로 2배 증가하였다. 또한 1인 가구 비율은 20%에서 38%로 크게 증가하였다. 이러한 변화는 젊은 인구의 유출과 고령화가 동시에 진행되고 있음을 보여준다. 따라서 인주시는 일자리 창출과 고령자 복지 정책을 동시에 추진해야 할 것으로 보인다.',
+    difficulty: 3,
+    time_limit: 15,
+    word_limit: { min: 200, max: 300 },
+  },
+
+  // ==========================================
+  // 54번 논설문 (600~700자)
+  // ==========================================
+  {
+    id: '54-1',
     type: 'essay',
     type_number: 54,
-    prompt: '다음 주제에 대해 800자 이상으로 글을 쓰시오.\n\n"한국 문화가 세계적으로 주목받는 이유"',
-    requirements: '• 자신의 생각과 경험을 구체적으로 서술하시오.\n• 논리적인 구조로 글을 구성하시오.\n• 적절한 예시를 제시하시오.',
-    sample_answer: '한국 문화가 세계적으로 주목받는 이유에는 여러 가지가 있습니다. 먼저, K-POP과 드라마를 중심으로 한 한류 문화의 영향이 큽니다...',
-    difficulty: 2,
-    time_limit: 30,
-  },
-  {
-    id: '2',
-    type: 'description',
-    type_number: 55,
-    prompt: '다음 사진을 보고 300자 이상으로 자세히 설명하시오.\n\n[사진: 서울 시내 전경]',
-    requirements: '• 사진에 있는 주요 요소들을 설명하시오.\n• 시각적 세부사항을 포함하시오.\n• 논리적인 순서로 설명하시오.',
-    difficulty: 2,
-    time_limit: 20,
-  },
-  {
-    id: '3',
-    type: 'story',
-    type_number: 56,
-    prompt: '다음 상황을 시작으로 하는 이야기를 400자 이상으로 쓰시오.\n\n"어느 추운 겨울 날, 갑자기 낯선 사람이 찾아왔다..."',
-    requirements: '• 인물, 장소, 사건을 포함하시오.\n• 일어난 순서대로 서술하시오.\n• 적절한 결말을 포함하시오.',
-    difficulty: 1,
-    time_limit: 25,
-  },
-  {
-    id: '4',
-    type: 'opinion',
-    type_number: 57,
-    prompt: '다음 주제에 대한 자신의 의견을 600자 이상으로 쓰시오.\n\n"대학 등록금은 인상되어야 하는가?"',
-    requirements: '• 자신의 의견을 명확히 제시하시오.\n• 근거를 구체적으로 제시하시오.\n• 반대 의견도 고려하시오.',
+    points: 50,
+    prompt:
+      '다음을 주제로 하여 자신의 생각을 600~700자로 글을 쓰시오. 단, 문제를 그대로 옮겨 쓰지 마시오. (50점)\n\n오늘날 경제에 대한 관심이 커지면서 아이들에게 생산, 소비, 돈 등 경제 교육을 하는 시기가 빨라지고 있다. 그러나 아이들에게 경제 교육을 하면 물질 중심 가치관을 키울 수 있다는 우려가 나오고 있다.\n\n1. 아이들에게 경제 교육을 하는 것의 장점은 무엇인가?\n2. 아이들에게 경제 교육을 하는 것의 문제점은 무엇인가?\n3. 아이들에게 올바른 경제 교육 방법은 어떤 것들이 있을까?',
+    requirements:
+      '• 주제에 대한 자신의 생각을 논리적으로 서술하시오.\n• 구체적인 예시를 제시하시오.\n• 600~700자로 서술하시오.',
+    sample_answer:
+      '요즘은 학교에 들어가기 전 어릴 때부터 아이들에게 다양한 교육을 실시하는 경우가 많다. 특히 경제 교육에 대한 관심이 커지면서 자녀에게 경제 개념을 가르치는 부모가 늘고 있다. 이러한 조기 경제 교육은 긍정적인 면도 있지만 우려되는 부분도 있다.\n\n먼저 경제 교육의 장점은 아이들이 돈의 가치를 일찍 이해할 수 있다는 점이다. 예를 들어 용돈을 관리하면서 저축과 지출의 개념을 배우면, 성장했을 때 합리적인 소비 습관을 가질 수 있다. 또한 기업이나 시장의 작동 원리를 이해함으로써 사회 경제에 대한 관심을 높이는 데도 도움이 된다.\n\n그러나 경제 교육에는 문제점도 있다. 너무 어린 나이에 돈이나 이윤에만 집중하게 되면 물질적 가치관이 형성될 수 있다. 또한 경쟁적인 태도가 강조될 경우 협력적인 성장에 부정적인 영향을 미칠 수 있다. 부모의 압력에 의해 이루어지는 경제 교육은 아이에게 스트레스를 줄 수도 있다.\n\n따라서 올바른 경제 교육을 위해서는 아이의 발달 단계에 맞는 교육이 이루어져야 한다. 놀이를 통한 체험 학습이나 실생활의 예시를 활용하는 것이 효과적이다. 또한 돈뿐 아니라 나눔과 협력의 가치를 함께 가르치는 것이 중요하다. 그래야만 아이들이 건강한 경제관을 형성할 수 있을 것이다.',
     difficulty: 3,
     time_limit: 30,
+    word_limit: { min: 600, max: 700 },
   },
   {
-    id: '5',
-    type: 'debate',
-    type_number: 58,
-    prompt: '다음 주제에 대해 찬성과 반대 논거를 각각 300자 이상으로 쓰시오.\n\n"인공지능은 인간의 일자리를 대체할 것이다"',
-    requirements: '• 찬성 논거를 제시하시오.\n• 반대 논거를 제시하시오.\n• 근거를 구체적으로 제시하시오.',
+    id: '54-2',
+    type: 'essay',
+    type_number: 54,
+    points: 50,
+    prompt:
+      '다음을 주제로 하여 자신의 생각을 600~700자로 글을 쓰시오. 단, 문제를 그대로 옮겨 쓰지 마시오. (50점)\n\n학교나 회사에서 다수의 동료와 힘을 합쳐 과제나 프로젝트를 할 때 성공적인 결과를 얻는 경우가 많다. 하지만 그렇지 못한 경우도 있다.\n\n1. 동료와 함께 일을 하는 것은 어떤 점에서 긍정적인가?\n2. 성공적인 결과를 얻는 데 방해가 되는 요인은 무엇인가?\n3. 동료와 일을 할 때 지녀야 할 바람직한 태도는 무엇인가?',
+    requirements:
+      '• 주제에 대한 자신의 생각을 논리적으로 서술하시오.\n• 구체적인 예시를 제시하시오.\n• 600~700자로 서술하시오.',
+    sample_answer:
+      '학교나 회사에서 과제나 프로젝트를 할 때 여러 명이 협력하면 좋은 결과를 얻을 수 있다. 하지만 항상 성공적인 결과가 나오는 것은 아니며, 어떤 태도를 가지느냐가 중요한 요인이 된다.\n\n먼저 동료와 함께 일을 하는 긍정적인 점은 각자의 잘하는 분야를 나눌 수 있다는 것이다. 혼자서는 모든 것을 다 해야 하지만 여러 명이서는 역할을 분담할 수 있어 효율적으로 일을 끝낼 수 있다. 또한 서로 도움을 주고받으며 힘들 때 위로가 되기도 한다.\n\n그러나 방해 요인도 존재한다. 자신의 생각만이 맞다고 주장하는 태도가 가장 큰 문제이다. 이러한 태도는 팀원 간의 갈등을 일으키고 일의 진행을 더디게 만든다. 또한 모든 사람이 쉬운 일만 하려는 태도도 성공적인 결과를 방해한다.\n\n따라서 동료와 일을 할 때는 상대방의 의견을 존중하고 경청하는 태도가 필요하다. 자신이 맡은 일은 성실하게 수행하고, 팀 전체의 목표를 먼저 생각하는 마음가짐이 중요하다. 또한 정해진 기한을 지키고 서로 격려하는 분위기를 만드는 것이 바람직하다. 이러한 태도가 모여야 성공적인 결과를 얻을 수 있을 것이다.',
     difficulty: 3,
-    time_limit: 35,
+    time_limit: 30,
+    word_limit: { min: 600, max: 700 },
+  },
+  {
+    id: '54-3',
+    type: 'essay',
+    type_number: 54,
+    points: 50,
+    prompt:
+      '다음을 주제로 하여 자신의 생각을 600~700자로 글을 쓰시오. 단, 문제를 그대로 옮겨 쓰지 마시오. (50점)\n\n우리는 살면서 서로의 생각이 달라 갈등을 겪는 경우가 많다. 이러한 갈등은 의사소통이 부족해서 생기는 경우가 대부분이다. 의사소통은 서로의 관계를 유지하고 발전시키는 데 중요한 요인이 된다.\n\n1. 의사소통은 왜 중요한가?\n2. 의사소통이 잘 이루어지지 않는 이유는 무엇인가?\n3. 의사소통을 원활하게 하는 방법은 무엇인가?',
+    requirements:
+      '• 주제에 대한 자신의 생각을 논리적으로 서술하시오.\n• 구체적인 예시를 제시하시오.\n• 600~700자로 서술하시오.',
+    sample_answer:
+      '우리는 일상에서 다양한 사람들과 대화를 나누며 살아간다. 이때 의사소통은 상대방의 마음을 이해하고 관계를 유지하는 데 매우 중요한 역할을 한다. 의사소통이 원활하면 갈등을 예방하고 서로 신뢰를 쌓을 수 있기 때문이다.\n\n그러나 의사소통이 잘 이루어지지 않는 경우도 많다. 첫 번째 이유는 자신의 생각만을 주장하고 상대방의 말을 끝까지 듣지 않는 것이다. 두 번째 이유는 감정에 치우쳐 이성적인 대화가 불가능해지는 경우이다. 또한 문화적 차이나 표현의 차이로 인해 오해가 생기기도 한다.\n\n의사소통을 원활하게 하는 방법으로는 먼저 상대방의 말을 끝까지 경청하는 것이 있다. 경청은 상대방에 대한 존중을 보여주는 것이며, 그래야만 진정한 이해가 가능하다. 또한 자신의 생각을 명확하고 간결하게 전달하는 노력이 필요하다. 감정에 휘둘리지 않고 차분하게 대화하는 태도도 중요하다. 마지막으로 상대방의 입장을 먼저 생각해 보는 여유가 필요하다. 이러한 노력이 쌓이면 원활한 의사소통이 가능해질 것이다.',
+    difficulty: 3,
+    time_limit: 30,
+    word_limit: { min: 600, max: 700 },
   },
 ];
 
-export const mockTestAnswers = [
-  '저는 한국 문화가 세계적으로 주목받는 이유는 K-POP과 드라마 때문이라고 생각합니다. 한국 음악과 드라마는 아시아뿐만 아니라 전 세계에서 인기를 끌고 있습니다.',
-  '한국어를 배우는 것은 재미있지만 어려워요. 특히 조사와 어순이 한국어와 다른 언어와 달라서 헷갈릴 때가 많습니다.',
-  '서울은 아주 크고 아름다운 도시입니다. 한강이 도시를 가로지르고 있고, 고층 빌딩과 전통 건물이 공존하고 있습니다.',
-  '저는 매일 한국어 공부를 합니다. 아침에 단어를 외우고, 저녁에 듣기 연습을 합니다. 한국 드라마를 보면서 한국어를 배우기도 합니다.',
-  '한국 음식 중에서 김치찌개를 가장 좋아해요. 김치찌개는 김치와 돼지고기를 넣고 끓인 음식인데, 매우 맛있어요.',
-  '한국은 사계절이 뚜렷해요. 봄에는 벚꽃이 아름답고, 여름에는 축제가 많아요. 가을에는 단풍이 예쁘고, 겨울에는 눈이 와요.',
-  '한국 드라마를 자주 보는데 감동적이에요. 특히 로맨틱 코미디 드라마를 좋아합니다. 배우들의 연기도 뛰어나요.',
-  '한국 친구들과 대화하는 것이 좋아요. 한국 친구들은 항상 친절하고, 저에게 한국어를 가르쳐줍니다.',
-  '저는 한국 여행을 가고 싶어요. 먼저 서울에 가서 경복궁과 북촌한옥마을을 방문하고 싶어요.',
-  '한국 문화는 매우 다양해요. 음악, 영화, 음식 등 여러 가지가 있어요. 저는 한국 문화를 좋아합니다.',
-];
+// 테스트용 랜덤 답변 목록
+export const mockTestAnswers: Record<string, string[]> = {
+  fill_blank: [
+    '정보가 너무 많아서 자신에게 꼭 필요한 것만 골라보는 것이 중요해졌다. 다양한 정보를 비교하고 출처를 확인하는 습관이 필요하다.',
+    '대화에서 상대방의 말을 주의 깊게 듣는 것은 매우 중요하다. 경청은 상대방을 존중하는 가장 기본적인 방법이다.',
+    '혼자 밥을 먹으면서 외로움을 느끼는 사람들이 있다. 혼밥 식당은 이러한 사람들에게 편안한 공간을 제공한다.',
+    '전통 문화를 지키려는 노력이 활발해지고 있다. 그러나 젊은 세대의 참여가 더EEDED해지고 있다.',
+  ],
+  data_description: [
+    '자료에 따르면 해당 수치는 지속적으로 변화하고 있다. 처음에는 큰 폭으로 증가하였으나, 시간이 지나면서 증가율이 점차 낮아지는 추세를 보인다. 이러한 변화는 시장이 성숙 단계에 진입하고 있음을 나타낸다. 따라서 새로운 정책이나 전략이 필요할 것으로 보인다.',
+    '제시된 자료를 분석하면 주목할 만한 변화가 나타나고 있다. 초기에는 뚜렷한 증가세를 보였으나, 최근에는 그 폭이 줄어들고 있다. 이러한 현상은 관련 분야의 구조적 변화와 관련이 있을 수 있다. 향후 지속적인 모니터링이 필요하다.',
+  ],
+  essay: [
+    '현대 사회에서 협력의 중요성은 점점 커지고 있다. 혼자서는 해결하기 어려운 문제도 여러 사람이 함께하면 풀 수 있는 경우가 많다. 예를 들어 학교에서 팀 프로젝트를 할 때 각자의 잘하는 역할을 나누면 효율적으로 결과물을 만들 수 있다. 또한 서로의 부족한 부분을 채워줄 수 있어 성장하는 데도 도움이 된다.\n\n그러나 협력 과정에서 어려움도 발생한다. 가장 큰 문제는 의견 충돌이다. 서로 다른 관점을 가진 사람들이 하나의 결과물을 만들어야 하기 때문에 갈등이 생기기 쉽다. 또한 누군가가 소홀히 하면 다른 팀원들의 부담이 커지게 된다.\n\n이러한 문제를 해결하기 위해서는 서로 존중하고 경청하는 태도가 필요하다. 자신만의 주장보다 팀 전체의 목표를 생각하는 마음가짐이 중요하다. 또한 맡은 일은 성실하게 수행하고 정해진 기한을 지키는 것이 바람직하다. 이러한 노력이 쌓이면 원활한 협력이 가능해질 것이다.',
+  ],
+};
 
-export function generateMockFeedback(content: string): FeedbackResult {
+// 규칙 기반 피드백 생성
+export function generateMockFeedback(content: string, type: string): FeedbackResult {
   const feedback: FeedbackResult = {
     autoCorrections: [],
     grammarErrors: [],
@@ -114,21 +217,25 @@ export function generateMockFeedback(content: string): FeedbackResult {
   };
 
   // 자동 수정 규칙
-  const autoCorrectionRules: Array<{ pattern: RegExp; corrected: string; original: string }> = [
-    { pattern: /갔어요/g, corrected: '갔어요', original: '갔어요' },
-    { pattern: /했어요/g, corrected: '했어요', original: '했어요' },
-    { pattern: /있어요/g, corrected: '있어요', original: '있어요' },
-    { pattern: /좋아합니다/g, corrected: '좋아해요', original: '좋아합니다' },
-    { pattern: /배웁니다/g, corrected: '배워요', original: '배웁니다' },
-    { pattern: /합니다/g, corrected: '해요', original: '합니다' },
+  const autoRules: Array<{ pattern: RegExp; original: string; corrected: string }> = [
+    { pattern: /좋아합니다/g, original: '좋아합니다', corrected: '좋아해요' },
+    { pattern: /합니다/g, original: '합니다', corrected: '해요' },
+    { pattern: /배웁니다/g, original: '배웁니다', corrected: '배워요' },
+    { pattern: /있습니다/g, original: '있습니다', corrected: '있어요' },
+    { pattern: /습니다/g, original: '습니다', corrected: '어요' },
+    { pattern: /去了/g, original: '去了', corrected: '갔습니다' },
   ];
 
-  autoCorrectionRules.forEach(rule => {
-    if (rule.pattern.test(content)) {
+  autoRules.forEach((rule) => {
+    const match = content.match(rule.pattern);
+    if (match) {
       feedback.autoCorrections.push({
         original: rule.original,
         corrected: rule.corrected,
-        position: { start: content.indexOf(rule.original), end: content.indexOf(rule.original) + rule.original.length },
+        position: {
+          start: content.indexOf(match[0]),
+          end: content.indexOf(match[0]) + match[0].length,
+        },
       });
     }
   });
@@ -142,35 +249,35 @@ export function generateMockFeedback(content: string): FeedbackResult {
     corrected: string;
   }> = [
     {
-      pattern: /이\s*것/g,
-      type: '조사 오류',
-      explanation: '"이것"은 "이것"으로 써야 합니다. "이 것"은 잘못된 표기입니다.',
+      pattern: /이\s+것/g,
+      type: '띄어쓰기',
+      explanation: '"이것"은 붙여 써야 합니다. "이 것"은 잘못된 표기입니다.',
       suggestion: '"이것"으로 바꿔주세요.',
       corrected: '이것',
     },
     {
       pattern: /저는.*좋아합니다/g,
-      type: '어조 불일치',
-      explanation: '구어체에서는 "-합니다"보다 "-해요"가 더 자연스럽습니다.',
+      type: '어조 일치',
+      explanation: '구어체 문장에서는 "-합니다"보다 "-해요" 체가 더 자연스럽습니다.',
       suggestion: '"좋아해요"로 바꿔주세요.',
       corrected: '좋아해요',
     },
     {
-      pattern: /한국어.*배웁니다/g,
-      type: '어조 불일치',
-      explanation: '구어체에서는 "-ㅂ니다"보다 "-요" 체가 자연스럽습니다.',
-      suggestion: '"배워요"로 바꿔주세요.',
-      corrected: '배워요',
+      pattern: /것이다\./g,
+      type: '문체',
+      explanation: '문어체 종결 표현입니다. 글의 나머지 문체와 일치시키세요.',
+      suggestion: '글의 문체(해요체/합쇼체)에 맞추어 종결하세요.',
+      corrected: '',
     },
   ];
 
-  grammarRules.forEach(rule => {
+  grammarRules.forEach((rule) => {
     const match = content.match(rule.pattern);
     if (match) {
       feedback.grammarErrors.push({
-        id: `grammar-${feedback.grammarErrors.length}`,
+        id: `g${feedback.grammarErrors.length}`,
         original: match[0],
-        corrected: rule.corrected,
+        corrected: rule.corrected || match[0],
         type: rule.type,
         explanation: rule.explanation,
         suggestion: rule.suggestion,
@@ -180,68 +287,40 @@ export function generateMockFeedback(content: string): FeedbackResult {
   });
 
   // 맥락/흐름 검사
-  if (content.length < 200) {
+  if (type === 'essay' && content.length < 400) {
     feedback.contextIssues.push({
       type: 'length',
-      description: '답변이 너무 짧습니다. 더 자세한 설명이 필요합니다.',
-      suggestion: '구체적인 예시나 근거를 추가해주세요.',
-      affectedText: content.substring(0, 50) + '...',
-    });
-  }
-
-  const transitionWords = ['그러나', '하지만', '그래서', '또한', '예를 들어', '따라서'];
-  const hasTransition = transitionWords.some(word => content.includes(word));
-  if (content.length > 150 && !hasTransition) {
-    feedback.contextIssues.push({
-      type: 'transition',
-      description: '접속사나 전환 표현이 부족합니다.',
-      suggestion: '"그러나", "하지만", "그래서" 등의 표현을 사용해 문장 간 연결을 강화하세요.',
+      description: '논설문 답변이 400자 미만으로, 600~700자 요건을 충족하지 못합니다.',
+      suggestion: '구체적인 예시와 근거를 추가하여 분량을 늘려주세요.',
       affectedText: '',
     });
   }
 
+  if (type === 'data_description' && content.length < 150) {
+    feedback.contextIssues.push({
+      type: 'length',
+      description: '자료 설명 답변이 150자 미만으로, 200~300자 요건을 충족하지 못합니다.',
+      suggestion: '자료의 주요 특징과 변화 추세를 더 자세히 서술해주세요.',
+      affectedText: '',
+    });
+  }
+
+  if (content.length > 150) {
+    const transitions = ['그러나', '하지만', '그래서', '또한', '예를 들어', '따라서', '반면', '즉'];
+    const hasTransition = transitions.some((w) => content.includes(w));
+    if (!hasTransition) {
+      feedback.contextIssues.push({
+        type: 'transition',
+        description: '접속사나 전환 표현이 부족합니다.',
+        suggestion: '"그러나", "하지만", "그래서", "예를 들어" 등의 표현을 사용하여 문장 간 연결을 강화하세요.',
+        affectedText: '',
+      });
+    }
+  }
+
   // 점수 계산
-  const deductionForGrammar = feedback.grammarErrors.length * 5;
-  const deductionForLength = content.length < 200 ? 15 : 0;
-  feedback.overallScore = Math.max(50, 90 - deductionForGrammar - deductionForLength);
+  const deduction = feedback.grammarErrors.length * 3 + feedback.contextIssues.length * 5;
+  feedback.overallScore = Math.max(40, 85 - deduction);
 
   return feedback;
-}
-
-export const languageTranslations: Record<string, string> = {
-  ja: '日本語',
-  zh: '中文',
-  en: 'English',
-  vi: 'Tiếng Việt',
-  th: 'ภาษาไทย',
-  id: 'Bahasa Indonesia',
-  other: '기타',
-};
-
-export function getTranslation(word: string, nationality: string): string {
-  const translations: Record<string, Record<string, string>> = {
-    ja: {
-      '가족': '家族 (かぞく)',
-      '문화': '文化 (ぶんか)',
-      '음식': '食り物 (たべもの)',
-      '여행': '旅行 (りょこう)',
-      '친구': '友達 (ともだち)',
-    },
-    zh: {
-      '가족': '家庭 (jiātíng)',
-      '문화': '文化 (wénhuà)',
-      '음식': '食物 (shíwù)',
-      '여행': '旅行 (lǚxíng)',
-      '친구': '朋友 (péngyǒu)',
-    },
-    en: {
-      '가족': 'family',
-      '문화': 'culture',
-      '음식': 'food',
-      '여행': 'travel',
-      '친구': 'friend',
-    },
-  };
-
-  return translations[nationality]?.[word] || word;
 }
