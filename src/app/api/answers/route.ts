@@ -1,0 +1,73 @@
+import { NextResponse } from 'next/server';
+import { getSupabase, isSupabaseConfigured } from '@/lib/supabase';
+import { mockTestAnswers } from '@/data/mockData';
+import { Answer } from '@/types';
+
+const answers: Answer[] = [];
+
+export async function POST(request: Request) {
+  const body = await request.json();
+  const { problemId, content, isMockData = false } = body;
+
+  const newAnswer: Answer = {
+    id: Date.now().toString(),
+    problem_id: problemId,
+    user_id: 'test-user',
+    content,
+    is_mock_data: isMockData,
+    created_at: new Date().toISOString(),
+  };
+
+  // Supabase가 설정되어 있으면 DB에 저장
+  if (isSupabaseConfigured()) {
+    const supabase = getSupabase();
+    const { data, error } = await supabase
+      .from('answers')
+      .insert({
+        problem_id: problemId,
+        user_id: 'test-user',
+        content,
+        is_mock_data: isMockData,
+      })
+      .select()
+      .single();
+
+    if (error) {
+      console.error('Supabase error:', error);
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    return NextResponse.json(data);
+  }
+
+  // Supabase가 없으면 메모리에 저장
+  answers.push(newAnswer);
+
+  return NextResponse.json(newAnswer);
+}
+
+export async function GET() {
+  // Supabase가 설정되어 있으면 DB에서 조회
+  if (isSupabaseConfigured()) {
+    const supabase = getSupabase();
+    const { data, error } = await supabase
+      .from('answers')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      console.error('Supabase error:', error);
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    return NextResponse.json(data);
+  }
+
+  // Supabase가 없으면 메모리에서 조회
+  return NextResponse.json(answers);
+}
+
+export function getMockTestAnswer(): string {
+  const randomIndex = Math.floor(Math.random() * mockTestAnswers.length);
+  return mockTestAnswers[randomIndex];
+}
