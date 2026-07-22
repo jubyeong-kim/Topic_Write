@@ -1,53 +1,58 @@
 'use client';
 
 import { useState, useEffect, Suspense } from 'react';
-import { useRouter, useParams, useSearchParams } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 import FeedbackView from '@/components/FeedbackView';
 import { FeedbackResult, Problem } from '@/types';
 
 function FeedbackContent() {
   const router = useRouter();
   const params = useParams();
-  const searchParams = useSearchParams();
   const answerId = params.id as string;
-  const content = searchParams.get('content') || '';
-  const problemType = searchParams.get('type') || 'essay';
-  const problemId = searchParams.get('problemId') || '';
 
   const [feedback, setFeedback] = useState<FeedbackResult | null>(null);
   const [problem, setProblem] = useState<Problem | null>(null);
+  const [content, setContent] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (content) {
-      generateFeedback();
-    }
-    if (problemId) {
-      fetchProblem();
-    }
-  }, [content, problemId]);
+    loadAnswer();
+  }, [answerId]);
 
-  const fetchProblem = async () => {
+  // id로 저장된 답변을 조회 — 본문/피드백/문제를 한 번에 가져온다.
+  const loadAnswer = async () => {
     try {
-      const res = await fetch(`/api/problems/${problemId}`);
-      const data: Problem = await res.json();
-      setProblem(data);
-    } catch (e) {
-      console.error('Failed to fetch problem:', e);
-    }
-  };
+      const res = await fetch(`/api/answers/${answerId}`);
+      if (!res.ok) throw new Error('answer not found');
+      const answer = await res.json();
+      setContent(answer.content || '');
 
-  const generateFeedback = async () => {
-    try {
-      const response = await fetch('/api/feedback', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ answerId, content, type: problemType, problemId }),
-      });
-      const data = await response.json();
-      setFeedback(data);
+      // 문제 정보: 조인된 값 우선, 없으면 개별 조회
+      let prob: Problem | null = answer.problems ?? null;
+      if (!prob && answer.problem_id) {
+        const pRes = await fetch(`/api/problems/${answer.problem_id}`);
+        if (pRes.ok) prob = await pRes.json();
+      }
+      setProblem(prob);
+
+      // 저장된 피드백이 있으면 그대로 사용, 없으면(메모리 모드) 재채점
+      if (answer.feedback) {
+        setFeedback(answer.feedback);
+      } else {
+        const fbRes = await fetch('/api/feedback', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            answerId,
+            content: answer.content,
+            type: prob?.type || 'essay',
+            problemId: answer.problem_id,
+          }),
+        });
+        setFeedback(await fbRes.json());
+      }
     } catch (error) {
-      console.error('Failed to generate feedback:', error);
+      console.error('Failed to load answer:', error);
     } finally {
       setLoading(false);
     }

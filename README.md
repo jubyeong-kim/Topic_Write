@@ -120,6 +120,14 @@ Supabase SQL 편집기에서 `supabase-schema.sql` 과 `supabase-grammar-rules.s
 
 ---
 
+## 🗺️ 로드맵
+
+- [ ] **AI 채점 연동** — 규칙 기반 엔진을 더 고도화한 뒤, 논설문 총평 등에 Claude API를 연결할 예정 *(추후 단계)*
+- [ ] 회원가입 / 로그인 (Supabase Auth) — 유저별 기록 분리
+- [ ] 오답노트 — 틀린 문제만 모아보기
+
+---
+
 <div align="center">
 
 **TOPIK Write** · 한국어능력시험 쓰기 연습 플랫폼

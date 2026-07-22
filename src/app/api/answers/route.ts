@@ -3,7 +3,8 @@ import { getSupabase, isSupabaseConfigured } from '@/lib/supabase';
 import { mockTestAnswers } from '@/data/mockData';
 import { Answer } from '@/types';
 
-const answers: Answer[] = [];
+// Supabase 미설정 시 사용하는 메모리 저장소 (단건 조회 route에서도 재사용)
+export const memoryAnswers: Answer[] = [];
 
 export async function POST(request: Request) {
   const body = await request.json();
@@ -41,7 +42,7 @@ export async function POST(request: Request) {
   }
 
   // Supabase가 없으면 메모리에 저장
-  answers.push(newAnswer);
+  memoryAnswers.push(newAnswer);
 
   return NextResponse.json(newAnswer);
 }
@@ -64,7 +65,7 @@ export async function GET() {
   }
 
   // Supabase가 없으면 메모리에서 조회
-  return NextResponse.json(answers);
+  return NextResponse.json(memoryAnswers);
 }
 
 export function getMockTestAnswer(type: string): string {

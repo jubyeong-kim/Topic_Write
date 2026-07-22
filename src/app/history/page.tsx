@@ -115,7 +115,7 @@ export default function HistoryPage() {
         ) : (
           <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2">
             {filtered.map((answer) => (
-              <div key={answer.id} onClick={() => router.push(`/feedback/${answer.id}?content=${encodeURIComponent(answer.content)}&type=${answer.problems?.type || 'fill_blank'}&problemId=${answer.problem_id}`)}
+              <div key={answer.id} onClick={() => router.push(`/feedback/${answer.id}`)}
                 className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-5 cursor-pointer border border-gray-100"
               >
                 <div className="flex items-start justify-between mb-3">

@@ -56,7 +56,7 @@ function ProblemContent() {
         body: JSON.stringify({ answerId: answerData.id, content, problemId: selectedProblem.id }),
       });
 
-      router.push(`/feedback/${answerData.id}?content=${encodeURIComponent(content)}&type=${selectedProblem.type}&problemId=${selectedProblem.id}`);
+      router.push(`/feedback/${answerData.id}`);
     } catch (error) {
       console.error('Submit error:', error);
     } finally {
@@ -83,7 +83,7 @@ function ProblemContent() {
         body: JSON.stringify({ answerId: answerData.id, content: mockContent, problemId: selectedProblem.id }),
       });
 
-      router.push(`/feedback/${answerData.id}?content=${encodeURIComponent(mockContent)}&type=${selectedProblem.type}&problemId=${selectedProblem.id}`);
+      router.push(`/feedback/${answerData.id}`);
     } catch (error) {
       console.error('Mock submit error:', error);
     } finally {
