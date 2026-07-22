@@ -53,7 +53,7 @@ function ProblemContent() {
       await fetch('/api/feedback', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ answerId: answerData.id, content }),
+        body: JSON.stringify({ answerId: answerData.id, content, problemId: selectedProblem.id }),
       });
 
       router.push(`/feedback/${answerData.id}?content=${encodeURIComponent(content)}&type=${selectedProblem.type}&problemId=${selectedProblem.id}`);
@@ -80,7 +80,7 @@ function ProblemContent() {
       await fetch('/api/feedback', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ answerId: answerData.id, content: mockContent }),
+        body: JSON.stringify({ answerId: answerData.id, content: mockContent, problemId: selectedProblem.id }),
       });
 
       router.push(`/feedback/${answerData.id}?content=${encodeURIComponent(mockContent)}&type=${selectedProblem.type}&problemId=${selectedProblem.id}`);
@@ -209,6 +209,7 @@ function ProblemContent() {
                     <AnswerForm
                       problemId={selectedProblem.id}
                       problemType={selectedProblem.type}
+                      typeNumber={selectedProblem.type_number}
                       timeLimit={selectedProblem.time_limit}
                       onSubmit={handleSubmit}
                       onMockSubmit={handleMockSubmit}

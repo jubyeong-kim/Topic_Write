@@ -15,7 +15,7 @@ function FeedbackContent() {
   const problemId = searchParams.get('problemId') || '';
 
   const [feedback, setFeedback] = useState<FeedbackResult | null>(null);
-  const [sampleAnswer, setSampleAnswer] = useState<string>('');
+  const [problem, setProblem] = useState<Problem | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -31,9 +31,7 @@ function FeedbackContent() {
     try {
       const res = await fetch(`/api/problems/${problemId}`);
       const data: Problem = await res.json();
-      if (data.sample_answer) {
-        setSampleAnswer(data.sample_answer);
-      }
+      setProblem(data);
     } catch (e) {
       console.error('Failed to fetch problem:', e);
     }
@@ -44,7 +42,7 @@ function FeedbackContent() {
       const response = await fetch('/api/feedback', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ answerId, content, type: problemType }),
+        body: JSON.stringify({ answerId, content, type: problemType, problemId }),
       });
       const data = await response.json();
       setFeedback(data);
@@ -79,23 +77,52 @@ function FeedbackContent() {
           </div>
         ) : feedback ? (
           <>
+            {/* 문제 내용 표시 */}
+            {problem && (
+              <div className="bg-white rounded-xl shadow-sm p-6 mb-6">
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-lg font-bold text-gray-800">📋 문제 {problem.id}</h2>
+                  <span className="text-sm text-gray-500">{problem.points}점</span>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-3">
+                  <p className="text-gray-700 whitespace-pre-wrap leading-relaxed text-sm">
+                    {problem.prompt}
+                  </p>
+                </div>
+                {problem.requirements && (
+                  <div className="bg-blue-50 rounded-lg p-3">
+                    <p className="text-sm text-blue-700 whitespace-pre-wrap">
+                      {problem.requirements}
+                    </p>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* 피드백 결과 */}
             <div className="bg-white rounded-xl shadow-sm p-6">
               <FeedbackView
                 feedback={feedback}
                 originalContent={content}
-                sampleAnswer={sampleAnswer}
+                sampleAnswer={problem?.sample_answer || ''}
               />
             </div>
-            <div className="mt-6 flex gap-4">
+            <div className="mt-6 flex flex-col sm:flex-row gap-3">
+              <button
+                onClick={() => router.push('/history')}
+                className="sm:flex-1 bg-gray-100 text-gray-600 py-3 px-4 rounded-lg font-medium hover:bg-gray-200 transition-colors text-sm"
+              >
+                📋 목록
+              </button>
               <button
                 onClick={() => router.push('/')}
-                className="flex-1 bg-gray-200 text-gray-700 py-3 rounded-lg font-medium hover:bg-gray-300 transition-colors"
+                className="sm:flex-1 bg-gray-200 text-gray-700 py-3 px-4 rounded-lg font-medium hover:bg-gray-300 transition-colors text-sm"
               >
-                메인으로 돌아가기
+                메인으로
               </button>
               <button
                 onClick={() => router.back()}
-                className="flex-1 bg-blue-500 text-white py-3 rounded-lg font-medium hover:bg-blue-600 transition-colors"
+                className="sm:flex-1 bg-blue-500 text-white py-3 px-4 rounded-lg font-medium hover:bg-blue-600 transition-colors text-sm"
               >
                 다시 풀기
               </button>

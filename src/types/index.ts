@@ -10,6 +10,10 @@ export interface Problem {
   time_limit: number;
   word_limit?: { min: number; max: number };
   points?: number;
+  accepted_answers?: {
+    gap?: string[];
+    gat?: string[];
+  };
 }
 
 export interface Answer {

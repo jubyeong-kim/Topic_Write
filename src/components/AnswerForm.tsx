@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 interface AnswerFormProps {
   problemId: string;
   problemType: string;
+  typeNumber: number;
   timeLimit: number;
   onSubmit: (content: string) => void;
   onMockSubmit: (content: string) => void;
@@ -13,13 +14,18 @@ interface AnswerFormProps {
 export default function AnswerForm({
   problemId,
   problemType,
+  typeNumber,
   timeLimit,
   onSubmit,
   onMockSubmit,
 }: AnswerFormProps) {
   const [content, setContent] = useState('');
+  const [gapAnswer, setGapAnswer] = useState('');
+  const [gatAnswer, setGatAnswer] = useState('');
   const [timeLeft, setTimeLeft] = useState(timeLimit * 60);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
+
+  const isFillBlank = typeNumber === 51 || typeNumber === 52;
 
   // 타이머 카운트다운
   useEffect(() => {
@@ -42,14 +48,30 @@ export default function AnswerForm({
     }
   }, [timeLeft]);
 
+  const getCombinedContent = () => {
+    if (isFillBlank) {
+      return `ㄱ: ${gapAnswer}\nㄴ: ${gatAnswer}`;
+    }
+    return content;
+  };
+
+  const isFormValid = () => {
+    if (isFillBlank) {
+      return gapAnswer.trim() !== '' || gatAnswer.trim() !== '';
+    }
+    return content.trim() !== '';
+  };
+
   const handleSubmit = () => {
-    if (content.trim()) {
-      onSubmit(content);
+    const combined = getCombinedContent();
+    if (isFormValid()) {
+      onSubmit(combined);
     }
   };
 
   const handleMockSubmit = () => {
-    onMockSubmit(content || '');
+    const combined = isFormValid() ? getCombinedContent() : '';
+    onMockSubmit(combined);
   };
 
   const formatTime = (seconds: number) => {
@@ -89,6 +111,8 @@ export default function AnswerForm({
               setTimeLeft(timeLimit * 60);
               setIsTimerRunning(false);
               setContent('');
+              setGapAnswer('');
+              setGatAnswer('');
             }}
             className="px-4 py-2 rounded-lg text-sm font-medium bg-gray-200 text-gray-600 hover:bg-gray-300"
           >
@@ -98,30 +122,65 @@ export default function AnswerForm({
       </div>
 
       {/* 답변 입력 */}
-      <div className="relative">
-        <textarea
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          disabled={!isTimerRunning}
-          placeholder={isTimerRunning ? '여기에 답변을 작성하세요...' : '⏱️ 타이머를 시작한 후에 답변을 작성할 수 있습니다'}
-          className={`w-full h-64 p-4 border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
-            isTimerRunning
-              ? 'border-gray-200 bg-white'
-              : 'border-gray-100 bg-gray-50 text-gray-400'
-          }`}
-        />
-        <div className={`absolute bottom-3 right-3 text-sm ${
-          isTimerRunning ? 'text-gray-400' : 'text-gray-300'
-        }`}>
-          {content.length}자
+      {isFillBlank ? (
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">( ㄱ ) 답변</label>
+            <input
+              type="text"
+              value={gapAnswer}
+              onChange={(e) => setGapAnswer(e.target.value)}
+              disabled={!isTimerRunning}
+              placeholder={isTimerRunning ? '( ㄱ ) 에 들어갈 말을 한 문장으로 쓰시오...' : '⏱️ 타이머를 시작한 후에 답변을 작성할 수 있습니다'}
+              className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
+                isTimerRunning
+                  ? 'border-gray-200 bg-white'
+                  : 'border-gray-100 bg-gray-50 text-gray-400'
+              }`}
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">( ㄴ ) 답변</label>
+            <input
+              type="text"
+              value={gatAnswer}
+              onChange={(e) => setGatAnswer(e.target.value)}
+              disabled={!isTimerRunning}
+              placeholder={isTimerRunning ? '( ㄴ ) 에 들어갈 말을 한 문장으로 쓰시오...' : '⏱️ 타이머를 시작한 후에 답변을 작성할 수 있습니다'}
+              className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
+                isTimerRunning
+                  ? 'border-gray-200 bg-white'
+                  : 'border-gray-100 bg-gray-50 text-gray-400'
+              }`}
+            />
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="relative">
+          <textarea
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            disabled={!isTimerRunning}
+            placeholder={isTimerRunning ? '여기에 답변을 작성하세요...' : '⏱️ 타이머를 시작한 후에 답변을 작성할 수 있습니다'}
+            className={`w-full h-64 p-4 border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
+              isTimerRunning
+                ? 'border-gray-200 bg-white'
+                : 'border-gray-100 bg-gray-50 text-gray-400'
+            }`}
+          />
+          <div className={`absolute bottom-3 right-3 text-sm ${
+            isTimerRunning ? 'text-gray-400' : 'text-gray-300'
+          }`}>
+            {content.length}자
+          </div>
+        </div>
+      )}
 
       {/* 버튼 */}
       <div className="flex gap-3">
         <button
           onClick={handleSubmit}
-          disabled={!content.trim()}
+          disabled={!isFormValid()}
           className="flex-1 bg-blue-500 text-white py-3 rounded-lg font-medium hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
         >
           제출하기

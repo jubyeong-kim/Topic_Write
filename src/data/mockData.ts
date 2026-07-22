@@ -4,8 +4,8 @@ export const problemTypes: ProblemType[] = [
   {
     type: 'fill_blank',
     typeNumber: 51,
-    name: '빈칸 채우기',
-    description: '제시된 글을 읽고 빈칸에 들어갈 알맞은 문장을 한 문장으로 쓰시오.',
+    name: '실용문',
+    description: '초대장, 공지, 이메일, 안내문 등 생활문을 읽고 빈칸에 알맞은 문장을 한 문장으로 쓰시오.',
     points: 10,
     icon: '📝',
     color: 'bg-blue-500',
@@ -13,8 +13,8 @@ export const problemTypes: ProblemType[] = [
   {
     type: 'fill_blank',
     typeNumber: 52,
-    name: '빈칸 채우기',
-    description: '제시된 글을 읽고 빈칸에 들어갈 알맞은 문장을 한 문장으로 쓰시오.',
+    name: '설명문',
+    description: '과학, 건강, 환경 등 설명문을 읽고 빈칸에 알맞은 문장을 한 문장으로 쓰시오.',
     points: 10,
     icon: '📝',
     color: 'bg-green-500',
@@ -43,7 +43,7 @@ export const problemTypes: ProblemType[] = [
 
 export const mockProblems: Problem[] = [
   // ==========================================
-  // 51번 빈칸 채우기
+  // 51번 실용문 (생활문) — 격식체 (~습니다/ㅂ니다)
   // ==========================================
   {
     id: '51-1',
@@ -51,11 +51,15 @@ export const mockProblems: Problem[] = [
     type_number: 51,
     points: 10,
     prompt:
-      '다음을 읽고 ( ㄱ ) 과 ( ㄴ ) 에 들어갈 말을 각각 한 문장으로 쓰시오. (10점)\n\n현대 사회에서 정보의 양이 급격히 증가하면서, 사람들은 자신에게 필요한 정보를 정확하게 구분하는 능력이 점점 더 중요해지고 있다. 인터넷이나 소셜 미디어를 통해 하루에도 수많은 정보가 쏟아지는데, ( ㄱ ). 그래서 사람들은 정보의 신뢰성을 판단하는 안목이 필요하다. ( ㄴ ).',
+      '다음을 읽고 ( ㄱ ) 과 ( ㄴ ) 에 들어갈 말을 각각 한 문장으로 쓰시오. (10점)\n\n축제 관련 문의\n지난 주말 "인주시 별빛 축제"에 갔던 외국인입니다. 지금까지 살면서 이렇게 많은 별을 본 적이 없었습니다. 이번 축제에서 별도 보고 공연도 볼 수 있어서 정말 좋았습니다. 혹시 축제가 언제 또 있습니까? 있다면 이런 멋진 경험을 다시 ( ㄱ ). 또한 축제에 대해 더 알고 싶은데, 관련 자료를 얻을 수 있는 방법이 ( ㄴ ).',
     requirements:
-      '( ㄱ ) : 정보가 쏟아지는 상황에서 어떤 문제가 발생하는지 설명하시오.\n( ㄴ ) : 정보의 신뢰성을 판단하는 방법을 한 문장으로 쓰시오.',
+      '( ㄱ ) : 외국인이 다시 축제를 경험하고 싶다는 내용을 한 문장으로 쓰시오.\n( ㄴ ) : 축제 관련 자료를 얻는 방법을 한 문장으로 쓰시오.',
     sample_answer:
-      '(ㄱ) 모든 정보를 다 확인하는 것은 불가능하기 때문에 자신에게 필요한 정보를 선별하는 것이 중요하다.\n(ㄴ) 출처가 명확한지 확인하고 여러 정보를 비교하는 것이 바람직하다.',
+      '(ㄱ) 하고 싶습니다.\n(ㄴ) 알려주세요.',
+    accepted_answers: {
+      gap: ['하고 싶습니다', '하고 싶어요', '다시 가고 싶습니다', '체험하고 싶습니다'],
+      gat: ['알려주세요', '알려주시겠습니까', '알려줄 수 있습니까', '가르쳐 주세요'],
+    },
     difficulty: 2,
     time_limit: 10,
   },
@@ -65,17 +69,21 @@ export const mockProblems: Problem[] = [
     type_number: 51,
     points: 10,
     prompt:
-      '다음을 읽고 ( ㄱ ) 과 ( ㄴ ) 에 들어갈 말을 각각 한 문장으로 쓰시오. (10점)\n\n우리는 매일 다양한 사람들과 대화를 나눈다. 좋은 대화는 서로의 관계를 발전시키는 데 큰 도움이 된다. ( ㄱ ). 반대로 상대방의 말을 제대로 듣지 않으면 오해가 생길 수 있다. ( ㄴ ).',
+      '다음을 읽고 ( ㄱ ) 과 ( ㄴ ) 에 들어갈 말을 각각 한 문장으로 쓰시오. (10점)\n\n<호텔 공사 안내>\n\n오늘 9월 5일부터 15일까지 10일간 호텔 주차장 보수 공사가 진행될 예정입니다. 공사 기간 중에는 주차장을 이용할 수 없으니 ( ㄱ ). 인근 공영주차장을 대신 이용하실 수 있으며, 도보로 약 5분 거리에 있습니다. 공사가 원활하게 진행될 수 있도록 ( ㄴ ).',
     requirements:
-      '( ㄱ ) : 좋은 대화가 관계에 미치는 긍정적 영향을 설명하시오.\n( ㄴ ) : 대화에서 경청이 중요한 이유를 한 문장으로 쓰시오.',
+      '( ㄱ ) : 공사 기간 중 주차 불가에 대한 안내를 한 문장으로 쓰시오.\n( ㄴ ) : 고객의 협조를 요청하는 내용을 한 문장으로 쓰시오.',
     sample_answer:
-      '(ㄱ) 서로의 생각과 감정을 이해할 수 있어 신뢰가 쌓이고 관계가 깊어진다.\n(ㄴ) 경청은 상대방에 대한 존중을 보여주는 것이므로 대화의 기본이 된다.',
+      '(ㄱ) 양해해 주세요.\n(ㄴ) 협조해 주세요.',
+    accepted_answers: {
+      gap: ['양해해 주세요', '양해해 주시기 바랍니다', '이용이 불가합니다', '이용할 수 없습니다', '불편을 드려 죄송합니다'],
+      gat: ['협조해 주세요', '협조해 주시기 바랍니다', '도와주세요', '협조 부탁드립니다'],
+    },
     difficulty: 2,
     time_limit: 10,
   },
 
   // ==========================================
-  // 52번 빈칸 채우기
+  // 52번 설명문 — 문어체 (~ㄴ다/다)
   // ==========================================
   {
     id: '52-1',
@@ -83,11 +91,15 @@ export const mockProblems: Problem[] = [
     type_number: 52,
     points: 10,
     prompt:
-      '다음을 읽고 ( ㄱ ) 과 ( ㄴ ) 에 들어갈 말을 각각 한 문장으로 쓰시오. (10점)\n\n요즘은 혼자 식사하는 혼밥 인구가 늘고 있다. 혼자 밥을 먹는 것이 편안한 사람들도 있지만, ( ㄱ ). 이런 사람들을 위해 최근 혼자でも 편안하게 식사할 수 있는 혼밥 전문 식당이 생기고 있다. ( ㄴ ).',
+      '다음을 읽고 ( ㄱ ) 과 ( ㄴ ) 에 들어갈 말을 각각 한 문장으로 쓰시오. (10점)\n\n식물은 다양한 방법으로 자신을 보호한다. 덩굴성 야자나무는 빈 줄기를 개미에게 집으로 제공한다. 이 나무에 다른 동물이 다가오면 줄기 속에 있던 개미들은 밖으로 나온다. 이때 개미들의 움직임으로 소리가 생긴다. 이 소리는 동물을 깜짝 ( ㄱ ). 결국 놀란 동물은 나뭇잎을 먹지 못하고 달아나 버린다. 식물학자들은 이것이 바로 이 나무가 자신을 보호하는 ( ㄴ ).',
     requirements:
-      '( ㄱ ) : 혼밥이 불편한 사람들의 심리를 설명하시오.\n( ㄴ ) : 혼밥 전문 식장의 장점을 한 문장으로 쓰시오.',
+      '( ㄱ ) : 소리가 동물에게 미치는 효과를 한 문장으로 쓰시오.\n( ㄴ ) : 이것이 어떤 것인지 설명하는 문장을 쓰시오.',
     sample_answer:
-      '(ㄱ) 혼자서 밥을 먹으면 외롭거나 어색함을 느끼는 사람이 많다.\n(ㄴ) 혼자서도 부담 없이 식사할 수 있는 공간을 제공하여 편안한 식사를 돕는다.',
+      '(ㄱ) 놀라게 한다.\n(ㄴ) 방법이라고 한다.',
+    accepted_answers: {
+      gap: ['놀라게 한다', '놀라게 만든다', '깜짝 놀라게 한다', '겁을 준다'],
+      gat: ['방법이라고 한다', '방식이다', '보호 방법이다', '자기 방어술이다'],
+    },
     difficulty: 2,
     time_limit: 10,
   },
@@ -97,11 +109,15 @@ export const mockProblems: Problem[] = [
     type_number: 52,
     points: 10,
     prompt:
-      '다음을 읽고 ( ㄱ ) 과 ( ㄴ ) 에 들어갈 말을 각각 한 문장으로 쓰시오. (10점)\n\n한국의 전통 문화를 지키기 위한 노력이 활발해지고 있다. 예를 들어 한복을 입는 사람들이 늘고 있고, 전통 명절 문화를 체험하는 프로그램도 인기를 끌고 있다. ( ㄱ ). 그러나 젊은 층 사이에서는 전통 문화에 대한 관심이 여전히 부족하다는 의견도 있다. ( ㄴ ).',
+      '다음을 읽고 ( ㄱ ) 과 ( ㄴ ) 에 들어갈 말을 각각 한 문장으로 쓰시오. (10점)\n\n우리가 말할 때 듣는 소리와 녹음된 음성에서 듣는 소리와 다르게 느껴진다. 왜냐하면 녹음된 음성에서 들을 때와 말할 때 소리가 귀로 전달되는 방식이 ( ㄱ ). 녹음된 소리는 공기를 통해서만 귀로 전달된다. 그런데 말할 때의 소리는 ( ㄴ ) 머리뼈를 통해서도 전달된다. 이 두 가지 방식을 통해 귀로 전달되는 소리는 주파수와 소리의 두께에 대한 인식에 차이를 만든다.',
     requirements:
-      '( ㄱ ) : 전통 문화 지지 활동이 늘어나는 이유를 설명하시오.\n( ㄴ ) : 젊은 층의 관심 부족 문제를 해결하기 위한 방법을 한 문장으로 쓰시오.',
+      '( ㄱ ) : 소리 전달 방식이 다르다는 이유를 한 문장으로 쓰시오.\n( ㄴ ) : 공기 외에 다른 전달 경로를 설명하는 문장을 쓰시오.',
     sample_answer:
-      '(ㄱ) 정부와 지방자치단체의 지원과 SNS를 통한 홍보가 효과를 거두고 있기 때문이다.\n(ㄴ) 학교 교육이나 체험 활동을 통해 전통 문화의 가치를 자연스럽게 느끼게 해야 한다.',
+      '(ㄱ) 다르기 때문이다.\n(ㄴ) 공기를 통해서뿐만 아니라.',
+    accepted_answers: {
+      gap: ['다르기 때문이다', '전달 방식이 다르기 때문이다', '방법이 다르기 때문이다'],
+      gat: ['공기를 통해서뿐만 아니라', '공기 외에도', '공기뿐만 아니라', '골격을 통해서도'],
+    },
     difficulty: 2,
     time_limit: 10,
   },
@@ -193,10 +209,8 @@ export const mockProblems: Problem[] = [
 // 중국 화자 테스트용 목업 답변 (실제 오류 포함)
 export const mockTestAnswers: Record<string, string[]> = {
   fill_blank: [
-    '정보가 너무 많아서 필요한 것 골라보는 것이 중요해졌다. 다양한 정보 비교하고 출처 확인하는 습관 필요하다.',
-    '대화에서 상대방 말을 주의 깊게 듣는 것은 매우 중요하다. 경청은 상대방 존중하는 가장 기본적인 방법이다.',
-    '혼자 밥을 먹으면서 외로움을 느끼는 사람들 있다. 혼밥 식당은 이러한 사람들에게 편안한 공간 제공한다.',
-    '전통 문화를 지키려는 노력 활발해지고 있다. 그러나 젊은 세대 참여가 더 필요하고 있다.',
+    '다시 이런 축제 경험하고 싶습니다. 관련 자료를 알려주시겠습니까?',
+    '호텔 주차장을 이용할 수 없습니다. 공사 협조해 주시기 바랍니다.',
   ],
   data_description: [
     '자료에 따르면 해당 수치가 지속적으로 변화하고 있다. 처음에는 큰 폭으로 증가하였으나, 시간을 지나면서 증가율이 점차 낮아지는 추세를 보인다. 이러한 변화는 시장이 성숙 단계에 진입하고 있다는 것을 나타낸다. 따라서 새로운 정책이나 전략이 필요할 것으로 보인다.',
@@ -207,8 +221,174 @@ export const mockTestAnswers: Record<string, string[]> = {
   ],
 };
 
+// Supabase grammar_rules 테이블에서 가져온 규칙 타입
+export interface GrammarRuleInput {
+  id: number;
+  category: string;
+  pattern: string;
+  type: string;
+  explanation: string;
+  suggestion: string;
+  corrected: string | null;
+  severity: string;
+}
+
+// 내장 기본 규칙 (Supabase 연결 안 될 때 사용)
+const BUILTIN_RULES: GrammarRuleInput[] = [
+  // 띄어쓰기
+  { id: 0, category: '띄어쓰기', pattern: '[가-힣]+고싶다', type: '띄어쓰기', explanation: '"V-고 싶다"에서 띄어쓰기가 필요합니다.', suggestion: '"하고 싶다"처럼 띄어 써주세요.', corrected: null, severity: 'warning' },
+  { id: 0, category: '띄어쓰기', pattern: '[가-힣]+을수있다', type: '띄어쓰기', explanation: '"V-ㄹ 수 있다"에서 띄어쓰기가 필요합니다.', suggestion: '"할 수 있다"처럼 띄어 써주세요.', corrected: null, severity: 'warning' },
+  { id: 0, category: '띄어쓰기', pattern: '[가-힣]+을수없다', type: '띄어쓰기', explanation: '"V-ㄹ 수 없다"에서 띄어쓰기가 필요합니다.', suggestion: '"할 수 없다"처럼 띄어 써주세요.', corrected: null, severity: 'warning' },
+  { id: 0, category: '띄어쓰기', pattern: '[가-힣]+고있다', type: '띄어쓰기', explanation: '"V-고 있다"에서 띄어쓰기가 필요합니다.', suggestion: '"보고 있다"처럼 띄어 써주세요.', corrected: null, severity: 'warning' },
+  { id: 0, category: '띄어쓰기', pattern: '[가-힣]+을것이다', type: '띄어쓰기', explanation: '"V-ㄹ 것이다"에서 띄어쓰기가 필요합니다.', suggestion: '"갈 것이다"처럼 띄어 써주세요.', corrected: null, severity: 'warning' },
+  { id: 0, category: '띄어쓰기', pattern: '[가-힣]+야된다', type: '띄어쓰기', explanation: '"V-야 되다"에서 띄어쓰기가 필요합니다.', suggestion: '"가야 된다"처럼 띄어 써주세요.', corrected: null, severity: 'warning' },
+  { id: 0, category: '띄어쓰기', pattern: '[가-힣]+아야한다', type: '띄어쓰기', explanation: '"V-아야 하다"에서 띄어쓰기가 필요합니다.', suggestion: '"먹어야 한다"처럼 띄어 써주세요.', corrected: null, severity: 'warning' },
+  { id: 0, category: '띄어쓰기', pattern: '[가-힣]+부터시작', type: '띄어쓰기', explanation: '"~부터 시작"에서 띄어쓰기가 필요합니다.', suggestion: '"내일부터 시작"처럼 띄어 써주세요.', corrected: null, severity: 'warning' },
+  // 직역체
+  { id: 0, category: '직역체', pattern: '해결하기\\s+위해서', type: '중국어 직역체', explanation: '"为了解决"의 직역입니다. "해결하려면"이 더 자연스럽습니다.', suggestion: '"해결하려면"으로 바꿔주세요.', corrected: '해결하려면', severity: 'warning' },
+  { id: 0, category: '직역체', pattern: '협력 중요성', type: '조사 생략', explanation: '"협력의 중요성"처럼 관형격 조사 "의"가 필요합니다.', suggestion: '"협력의 중요성"으로 고쳐주세요.', corrected: '협력의 중요성', severity: 'warning' },
+  { id: 0, category: '직역체', pattern: '사람들\\s+있다', type: '조사 생략', explanation: '"사람들이 있다"에서 주격 조사 "이"가 생략되었습니다.', suggestion: '"사람들이 있다"로 고쳐주세요.', corrected: '사람들이 있다', severity: 'warning' },
+  { id: 0, category: '직역체', pattern: '공간\\s+제공한다', type: '조사 생략', explanation: '"공간을 제공한다"에서 목적격 조사 "를"이 누락되었습니다.', suggestion: '"공간을 제공한다"로 고쳐주세요.', corrected: '공간을 제공한다', severity: 'warning' },
+  { id: 0, category: '직역체', pattern: '역할\\s+나누', type: '조사 생략', explanation: '"역할을 나누면"에서 목적격 조사 "를"이 누락되었습니다.', suggestion: '"역할을 나누면"으로 고쳐주세요.', corrected: '역할을 나누', severity: 'warning' },
+];
+
+// 51/52번 스타일 감지
+function detectStyle(text: string): 'formal' | 'written' | 'informal' | 'neutral' {
+  const t = text.trim();
+  // 격식체: ~니다/습니다/니까/세요
+  if (/(니다|습니다|니까|세요)\s*$/.test(t)) return 'formal';
+  // 반말 (해체): ~어/아/야/해/줘/봐/래/네/군/구나/걸/래/데
+  if (/[가-힣]+(어|아|야|해|줘|봐|래|네|군|구나|걸|래|데)\s*$/.test(t)) return 'informal';
+  // 문어체: ~ㄴ다/는다/한다/이다 (격식체 제외)
+  if (/(ㄴ다|는다|한다|인다|이다)\s*$/.test(t)) return 'written';
+  return 'neutral';
+}
+
+function getRequiredStyle(typeNumber: number): { name: string; desc: string; example: string } {
+  if (typeNumber === 51) {
+    return { name: '격식체', desc: '~습니다/ㅂ니다', example: '하고 싶습니다, 양해해 주십시오' };
+  }
+  if (typeNumber === 52) {
+    return { name: '문어체', desc: '~ㄴ다/다', example: '놀라게 한다, 방법이라고 한다' };
+  }
+  return { name: '', desc: '', example: '' };
+}
+
+function getStyleMismatchFeedback(
+  text: string,
+  typeNumber: number,
+  label: string,
+): string | null {
+  if (!text) return null;
+  const style = detectStyle(text);
+  const required = getRequiredStyle(typeNumber);
+
+  if (style === 'informal') {
+    return `${label}이(가) 반말로 작성되었습니다. ${typeNumber}번 문제는 ${required.name}(${required.desc})로 작성해야 합니다.`;
+  }
+  if (typeNumber === 51 && style === 'written') {
+    return `${label}이(가) 문어체(~ㄴ다/다)로 작성되었습니다. 51번 문제는 ${required.name}(${required.desc})로 작성해야 합니다. 예: ${required.example}`;
+  }
+  if (typeNumber === 52 && style === 'formal') {
+    return `${label}이(가) 격식체(~습니다/ㅂ니다)로 작성되었습니다. 52번 문제는 ${required.name}(${required.desc})로 작성해야 합니다. 예: ${required.example}`;
+  }
+  return null;
+}
+
+// 51/52번 빈칸 채우기 정답 비교
+function checkFillBlankAnswer(
+  content: string,
+  problem: Problem,
+): { gapCorrect: boolean; gatCorrect: boolean; feedback: string; styleIssues: string[] } {
+  const accepted = problem.accepted_answers;
+  if (!accepted) return { gapCorrect: false, gatCorrect: false, feedback: '', styleIssues: [] };
+
+  let userGap = '';
+  let userGat = '';
+
+  // 형식 1: "ㄱ: ... / ㄴ: ..." 또는 "ㄱ. ... / ㄴ. ..." 등
+  const gapMatch = content.match(/[ㄱ]\s*[.:：\)]\s*(.+?)(?:\n|$|[ㄴ])/);
+  const gatMatch = content.match(/[ㄴ]\s*[.:：\)]\s*(.+?)$/m);
+
+  if (gapMatch && gatMatch) {
+    userGap = gapMatch[1].trim();
+    userGat = gatMatch[1].trim();
+  } else {
+    // 형식 2: 마커 없이 문장만 있는 경우 → 문장 분리
+    const sentences = content.split(/[.\n]/).map(s => s.trim()).filter(s => s.length > 0);
+    if (sentences.length >= 2) {
+      userGap = sentences[0];
+      userGat = sentences[1];
+    } else if (sentences.length === 1) {
+      userGap = sentences[0];
+    }
+  }
+
+  // 스타일 검사
+  const styleIssues: string[] = [];
+  const gapStyleIssue = getStyleMismatchFeedback(userGap, problem.type_number, '(ㄱ)');
+  if (gapStyleIssue) styleIssues.push(gapStyleIssue);
+  const gatStyleIssue = getStyleMismatchFeedback(userGat, problem.type_number, '(ㄴ)');
+  if (gatStyleIssue) styleIssues.push(gatStyleIssue);
+
+  // 정답 포함 여부 확인
+  // - userGap가 accepted 중 하나를 포함하거나
+  // - userGap의 70% 이상 글자가 accepted 중 하나에 포함됨
+  const gapCorrect = accepted.gap?.some(a => {
+    if (userGap.includes(a)) return true; // 완전 일치
+    // 내용 키워드 기반 매칭 (70% 이상 일치)
+    const userWords = userGap.replace(/[^가-힣\s]/g, '').split(/\s+/).filter(w => w.length >= 2);
+    const acceptedWords = a.replace(/[^가-힣\s]/g, '').split(/\s+/).filter(w => w.length >= 2);
+    if (userWords.length === 0 || acceptedWords.length === 0) return false;
+    const matched = userWords.filter(uw => acceptedWords.some(aw => aw.includes(uw) || uw.includes(aw)));
+    return matched.length >= Math.ceil(userWords.length * 0.7);
+  }) ?? false;
+
+  const gatCorrect = accepted.gat?.some(a => {
+    if (userGat.includes(a)) return true;
+    const userWords = userGat.replace(/[^가-힣\s]/g, '').split(/\s+/).filter(w => w.length >= 2);
+    const acceptedWords = a.replace(/[^가-힣\s]/g, '').split(/\s+/).filter(w => w.length >= 2);
+    if (userWords.length === 0 || acceptedWords.length === 0) return false;
+    const matched = userWords.filter(uw => acceptedWords.some(aw => aw.includes(uw) || uw.includes(aw)));
+    return matched.length >= Math.ceil(userWords.length * 0.7);
+  }) ?? false;
+
+  let feedback = '';
+  if (gapCorrect && gatCorrect) {
+    feedback = '모범답안과 일치합니다!';
+  } else {
+    if (!gapCorrect && userGap) {
+      feedback += `(ㄱ) "${userGap}" - 내용이 모범답안과 다릅니다.\n`;
+      const gapRef = accepted.gap?.slice(0, 3).join(' / ');
+      if (gapRef) feedback += `   ↳ 참고: ${gapRef}\n`;
+    }
+    if (!gatCorrect && userGat) {
+      feedback += `(ㄴ) "${userGat}" - 내용이 모범답안과 다릅니다.\n`;
+      const gatRef = accepted.gat?.slice(0, 3).join(' / ');
+      if (gatRef) feedback += `   ↳ 참고: ${gatRef}`;
+    }
+  }
+  if (gapCorrect && !userGat) {
+    feedback = '(ㄱ)은 정답입니다. (ㄴ) 답변을 추가해주세요.';
+  } else if (!gapCorrect && gatCorrect) {
+    feedback = '(ㄴ)은 정답입니다. (ㄱ) 답변을 확인해주세요.';
+  }
+
+  // 스타일 문제가 있고 내용이 정답이면 별도 메시지 추가
+  if (styleIssues.length > 0 && gapCorrect && gatCorrect) {
+    feedback = '내용은 모범답안과 일치하지만, 스타일을 확인하세요.';
+  }
+
+  return { gapCorrect, gatCorrect, feedback, styleIssues };
+}
+
 // 중국 화자 오류 패턴 기반 피드백 생성
-export function generateMockFeedback(content: string, type: string): FeedbackResult {
+export function generateMockFeedback(
+  content: string,
+  type: string,
+  externalRules: GrammarRuleInput[] = [],
+  problem?: Problem,
+): FeedbackResult {
   const feedback: FeedbackResult = {
     autoCorrections: [],
     grammarErrors: [],
@@ -216,140 +396,75 @@ export function generateMockFeedback(content: string, type: string): FeedbackRes
     overallScore: 75,
   };
 
-  // ── 자동 수정 규칙 (중국 화자 공통) ──
-  const autoRules: Array<{ pattern: RegExp; corrected: string }> = [
-    // 조사 생략: "중요성 커지고 있다" → "중요성이 커지고 있다"
-    { pattern: /의 중요성/g, corrected: '의 중요성이' },
-    // 어순 오류: "공간 제공한다" → "공간을 제공한다"
-    { pattern: /공간 (제|제공)/g, corrected: '공간을 $1' },
-    // 조사 누락: "방법 필요하다" → "방법이 필요하다"
-    { pattern: /방법 (필요|있|없)/g, corrected: '방법이 $1' },
-    // 목적격 조사 누락: "역할 나누면" → "역할을 나누면"
-    { pattern: /역할 나누/g, corrected: '역할을 나누' },
-  ];
-
-  autoRules.forEach((rule) => {
-    const match = content.match(rule.pattern);
-    if (match) {
-      feedback.autoCorrections.push({
-        original: match[0],
-        corrected: rule.corrected,
-        position: {
-          start: content.indexOf(match[0]),
-          end: content.indexOf(match[0]) + match[0].length,
-        },
+  // ── 51/52번 빈칸 채우기: 정답 비교 ──
+  if (problem && (problem.type_number === 51 || problem.type_number === 52)) {
+    const result = checkFillBlankAnswer(content, problem);
+    if (result.feedback) {
+      feedback.contextIssues.push({
+        type: 'flow',
+        description: result.feedback,
+        suggestion: problem.sample_answer || '',
+        affectedText: '',
       });
     }
-  });
-
-  // ── 중국 화자 문법 오류 검사 ──
-  const grammarRules: Array<{
-    pattern: RegExp;
-    type: string;
-    explanation: string;
-    suggestion: string;
-    corrected?: string;
-  }> = [
-    // 1. 조사 생략 (중국 화자 최다 오류)
-    {
-      pattern: /이\s+것/g,
-      type: '조사/띄어쓰기',
-      explanation: '중국어 화자가 자주 틀리는 표현입니다. "이것"은 한 단어로 붙여 써야 합니다.',
-      suggestion: '"이것"으로 붙여 쓰세요.',
-      corrected: '이것',
-    },
-    {
-      pattern: /사람들\s+있다/g,
-      type: '조사 생략',
-      explanation: '중국어에는 조사 개념이 없어 한국어 조사(이/가, 을/를, 은/는)를 자주 생략합니다. "사람들이 있다"처럼 주격 조사 "이"가 필요합니다.',
-      suggestion: '"사람들이 있다"로 고쳐주세요.',
-      corrected: '사람들이 있다',
-    },
-    {
-      pattern: /협력 중요성/g,
-      type: '조사 생략',
-      explanation: '"협력의 중요성"처럼 관형격 조사 "의"가 필요합니다. 중국어는 "的" 하나로 처리하지만 한국어는 조사가 필수입니다.',
-      suggestion: '"협력의 중요성"으로 고쳐주세요.',
-      corrected: '협력의 중요성',
-    },
-    {
-      pattern: /모니터링\s+필요/g,
-      type: '조사 생략',
-      explanation: '중국 화자가 자주 하는 실수입니다. 한국어는 "모니터링이 필요하다"처럼 주격 조사 "이/가"가 필요합니다.',
-      suggestion: '"모니터링이 필요하다"로 고쳐주세요.',
-      corrected: '모니터링이 필요',
-    },
-    {
-      pattern: /데\s+도움이\s+된다/g,
-      type: '조사 오용',
-      explanation: '"~하는 데 도움이 된다"에서 "데"는 의존 명사로 띄어 써야 합니다. 중국어 화자는 "~는데"와 혼동하기 쉽습니다.',
-      suggestion: '"~하는 데"로 띄어 쓰세요.',
-    },
-    {
-      pattern: /때문/g,
-      type: '조사 누락',
-      explanation: '"~기 때문이다"에서 "때문" 앞에 "이"가 필요합니다. 중국어 화자는 본용언만 쓰는 경향이 있습니다.',
-      suggestion: '"때문이다"가 아닌 "때문이다" 전체 문맥을 확인하세요.',
-    },
-    {
-      pattern: /참여가\s+더\s+필요하고\s+있다/g,
-      type: '어미 오류',
-      explanation: '"필요하고 있다"는 어색한 표현입니다. 중국어 화자가 자주 하는 오류로, "~고 있다"는 진행형에만 사용합니다.',
-      suggestion: '"참여가 더 필요하다"로 고쳐주세요.',
-      corrected: '참여가 더 필요하다',
-    },
-    // 2. 받침/연음 관련
-    {
-      pattern: /갈등이\s+생기기/g,
-      type: '어미 선택',
-      explanation: '"갈등이 생기다"보다 "갈등이 발생하다"가 더 자연스럽습니다. 중국어 화자는 직접 번역으로 인해 어색한 동사를 선택하는 경우가 많습니다.',
-      suggestion: '"갈등이 발생하기"로 바꿔보세요.',
-    },
-    // 3. 중국어 직역체
-    {
-      pattern: /해결하기\s+위해서/g,
-      type: '중국어 직역체',
-      explanation: '"为了解决"의 직역입니다. 한국어에서는 "해결하려면"이 더 자연스럽습니다.',
-      suggestion: '"해결하려면"으로 바꿔주세요.',
-      corrected: '해결하려면',
-    },
-  ];
-
-  grammarRules.forEach((rule) => {
-    const match = content.match(rule.pattern);
-    if (match) {
-      feedback.grammarErrors.push({
-        id: `g${feedback.grammarErrors.length}`,
-        original: match[0],
-        corrected: rule.corrected || match[0],
-        type: rule.type,
-        explanation: rule.explanation,
-        suggestion: rule.suggestion,
-        position: { start: content.indexOf(match[0]), end: content.indexOf(match[0]) + match[0].length },
+    // 스타일 이슈 개별 추가
+    for (const si of result.styleIssues) {
+      feedback.contextIssues.push({
+        type: 'coherence',
+        description: si,
+        suggestion: getRequiredStyle(problem.type_number).desc,
+        affectedText: '',
       });
     }
-  });
+    // 점수 계산 (내용 100점 기준, 스타일 문제당 -25점)
+    const contentScore = (result.gapCorrect ? 50 : 0) + (result.gatCorrect ? 50 : 0);
+    const styleDeduction = result.styleIssues.length * 25;
+    feedback.overallScore = Math.max(0, contentScore - styleDeduction);
+    return feedback;
+  }
 
-  // ── 추가 문법 검사: 조사 누락 패턴 ──
-  // 중국어 화자는 종종 필수 조사를 생략함
-  const missingParticlePatterns: Array<{ regex: RegExp; desc: string; suggest: string }> = [
-    { regex: /[가-힣]{2,}\s+필요/g, desc: '주격 조사 "이/가"가 누락되었습니다.', suggest: '"~이 필요하다"로 고쳐주세요.' },
-    { regex: /[가-힣]{2,}\s+중요/g, desc: '주격 조사 "이/가"가 누락되었습니다.', suggest: '"~이 중요하다"로 고쳐주세요.' },
-    { regex: /[가-힣]{2,}\s+가능/g, desc: '주격 조사 "이/가"가 누락되었습니다.', suggest: '"~이 가능하다"로 고쳐주세요.' },
-  ];
+  // Supabase 규칙이 있으면 사용, 없으면 내장 규칙 사용
+  const rules = externalRules.length > 0 ? externalRules : BUILTIN_RULES;
 
-  missingParticlePatterns.forEach((p) => {
-    const match = content.match(p.regex);
-    if (match && !feedback.grammarErrors.some((e) => e.original === match[0])) {
-      feedback.grammarErrors.push({
-        id: `g${feedback.grammarErrors.length}`,
-        original: match[0],
-        corrected: '',
-        type: '조사 생략 (중국어 영향)',
-        explanation: p.desc + ' 중국어는 "很需要/很重要"처럼 조사 없이 직결되지만, 한국어는 조사가 반드시 필요합니다.',
-        suggestion: p.suggest,
-        position: { start: content.indexOf(match[0]), end: content.indexOf(match[0]) + match[0].length },
-      });
+  // 규칙별로 패턴 매칭 실행
+  rules.forEach((rule) => {
+    try {
+      const regex = new RegExp(rule.pattern, 'g');
+      const match = content.match(regex);
+      if (match) {
+        const matched = match[0];
+        const startIdx = content.indexOf(matched);
+
+        // 이미 처리된 오류인지 확인 (같은 위치)
+        const alreadyProcessed = feedback.grammarErrors.some(
+          (e) => Math.abs(e.position.start - startIdx) < 3
+        );
+        if (alreadyProcessed) return;
+
+        // 자동 수정 규칙 (corrected가 있고 severity가 error/warning인 경우)
+        if (rule.corrected && rule.severity !== 'info') {
+          feedback.autoCorrections.push({
+            original: matched,
+            corrected: rule.corrected,
+            position: { start: startIdx, end: startIdx + matched.length },
+          });
+        }
+
+        // 문법 오류 목록에 추가 (info는 제외)
+        if (rule.severity !== 'info') {
+          feedback.grammarErrors.push({
+            id: `g${feedback.grammarErrors.length}`,
+            original: matched,
+            corrected: rule.corrected || matched,
+            type: rule.type,
+            explanation: rule.explanation,
+            suggestion: rule.suggestion,
+            position: { start: startIdx, end: startIdx + matched.length },
+          });
+        }
+      }
+    } catch {
+      // 잘못된 정규식 패턴은 무시
     }
   });
 
@@ -357,8 +472,8 @@ export function generateMockFeedback(content: string, type: string): FeedbackRes
   if (type === 'essay' && content.length < 400) {
     feedback.contextIssues.push({
       type: 'length',
-      description: '논설문 답변이 400자 미만으로, 600~700자 요건을 충족하지 못합니다. 중국 화자는 간결한 표현을 선호하지만 한국어 논설문은 충분한 분량이 필요합니다.',
-      suggestion: '구체적인 예시와 근거를 추가하여 분량을 늘려주세요. 각 문단에 "예를 들어", "또한" 등을 활용해 보세요.',
+      description: '논설문 답변이 400자 미만입니다. 충분한 분량으로 답변을 작성해주세요.',
+      suggestion: '각 질문에 대해 구체적인 예시와 근거를 추가해보세요.',
       affectedText: '',
     });
   }
@@ -378,16 +493,16 @@ export function generateMockFeedback(content: string, type: string): FeedbackRes
     if (!hasTransition) {
       feedback.contextIssues.push({
         type: 'transition',
-        description: '접속사나 전환 표현이 부족합니다. 중국어는 문맥으로 연결하지만 한국어는 접속사가 중요한 역할을 합니다.',
-        suggestion: '"그러나", "또한", "예를 들어", "첫째/둘째" 등의 표현을 사용하여 문장 간 연결을 강화하세요.',
+        description: '접속사나 전환 표현이 부족합니다.',
+        suggestion: '"그러나", "또한", "예를 들어", "첫째/둘째" 등을 사용해 문장 간 연결을 강화하세요.',
         affectedText: '',
       });
     }
   }
 
   // ── 점수 계산 ──
-  const deduction = feedback.grammarErrors.length * 4 + feedback.contextIssues.length * 5;
-  feedback.overallScore = Math.max(30, 90 - deduction);
+  const deduction = feedback.grammarErrors.length * 5 + feedback.contextIssues.length * 3;
+  feedback.overallScore = Math.max(35, 90 - deduction);
 
   return feedback;
 }

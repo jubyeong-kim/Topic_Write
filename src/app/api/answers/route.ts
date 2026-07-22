@@ -52,7 +52,7 @@ export async function GET() {
     const supabase = getSupabase();
     const { data, error } = await supabase
       .from('answers')
-      .select('*')
+      .select('*, problems(*)')
       .order('created_at', { ascending: false });
 
     if (error) {
