@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface AnswerFormProps {
   problemId: string;
@@ -20,6 +20,27 @@ export default function AnswerForm({
   const [content, setContent] = useState('');
   const [timeLeft, setTimeLeft] = useState(timeLimit * 60);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
+
+  // 타이머 카운트다운
+  useEffect(() => {
+    if (!isTimerRunning) return;
+    if (timeLeft <= 0) {
+      setIsTimerRunning(false);
+      return;
+    }
+    const interval = setInterval(() => {
+      setTimeLeft((prev) => Math.max(0, prev - 1));
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [isTimerRunning, timeLeft]);
+
+  // 시간 종료 시 알림
+  useEffect(() => {
+    if (timeLeft === 0 && isTimerRunning) {
+      setIsTimerRunning(false);
+      alert('⏰ 시간이 종료되었습니다!');
+    }
+  }, [timeLeft]);
 
   const handleSubmit = () => {
     if (content.trim()) {
@@ -43,17 +64,22 @@ export default function AnswerForm({
       <div className="flex items-center justify-between bg-gray-50 rounded-lg p-4">
         <div className="flex items-center gap-2">
           <span className="text-2xl">⏱️</span>
-          <span className="text-2xl font-mono font-bold text-gray-700">
+          <span className={`text-2xl font-mono font-bold ${
+            timeLeft === 0 ? 'text-red-600' : timeLeft < 60 ? 'text-orange-500' : 'text-gray-700'
+          }`}>
             {formatTime(timeLeft)}
           </span>
         </div>
         <div className="flex gap-2">
           <button
             onClick={() => setIsTimerRunning(!isTimerRunning)}
-            className={`px-4 py-2 rounded-lg text-sm font-medium ${
+            disabled={timeLeft === 0}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
               isTimerRunning
                 ? 'bg-red-100 text-red-600 hover:bg-red-200'
-                : 'bg-green-100 text-green-600 hover:bg-green-200'
+                : timeLeft === 0
+                  ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                  : 'bg-green-100 text-green-600 hover:bg-green-200'
             }`}
           >
             {isTimerRunning ? '일시정지' : '시작'}
@@ -62,6 +88,7 @@ export default function AnswerForm({
             onClick={() => {
               setTimeLeft(timeLimit * 60);
               setIsTimerRunning(false);
+              setContent('');
             }}
             className="px-4 py-2 rounded-lg text-sm font-medium bg-gray-200 text-gray-600 hover:bg-gray-300"
           >
@@ -75,10 +102,17 @@ export default function AnswerForm({
         <textarea
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          placeholder="여기에 답변을 작성하세요..."
-          className="w-full h-64 p-4 border border-gray-200 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          disabled={!isTimerRunning}
+          placeholder={isTimerRunning ? '여기에 답변을 작성하세요...' : '⏱️ 타이머를 시작한 후에 답변을 작성할 수 있습니다'}
+          className={`w-full h-64 p-4 border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
+            isTimerRunning
+              ? 'border-gray-200 bg-white'
+              : 'border-gray-100 bg-gray-50 text-gray-400'
+          }`}
         />
-        <div className="absolute bottom-3 right-3 text-sm text-gray-400">
+        <div className={`absolute bottom-3 right-3 text-sm ${
+          isTimerRunning ? 'text-gray-400' : 'text-gray-300'
+        }`}>
           {content.length}자
         </div>
       </div>
@@ -94,7 +128,12 @@ export default function AnswerForm({
         </button>
         <button
           onClick={handleMockSubmit}
-          className="flex-1 bg-purple-500 text-white py-3 rounded-lg font-medium hover:bg-purple-600 transition-colors"
+          disabled={!isTimerRunning}
+          className={`flex-1 py-3 rounded-lg font-medium transition-colors ${
+            isTimerRunning
+              ? 'bg-purple-500 text-white hover:bg-purple-600'
+              : 'bg-gray-100 text-gray-400 cursor-not-allowed'
+          }`}
         >
           🎲 임의 답변 제출
         </button>

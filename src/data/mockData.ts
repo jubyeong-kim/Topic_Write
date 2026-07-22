@@ -190,24 +190,24 @@ export const mockProblems: Problem[] = [
   },
 ];
 
-// 테스트용 랜덤 답변 목록
+// 중국 화자 테스트용 목업 답변 (실제 오류 포함)
 export const mockTestAnswers: Record<string, string[]> = {
   fill_blank: [
-    '정보가 너무 많아서 자신에게 꼭 필요한 것만 골라보는 것이 중요해졌다. 다양한 정보를 비교하고 출처를 확인하는 습관이 필요하다.',
-    '대화에서 상대방의 말을 주의 깊게 듣는 것은 매우 중요하다. 경청은 상대방을 존중하는 가장 기본적인 방법이다.',
-    '혼자 밥을 먹으면서 외로움을 느끼는 사람들이 있다. 혼밥 식당은 이러한 사람들에게 편안한 공간을 제공한다.',
-    '전통 문화를 지키려는 노력이 활발해지고 있다. 그러나 젊은 세대의 참여가 더EEDED해지고 있다.',
+    '정보가 너무 많아서 필요한 것 골라보는 것이 중요해졌다. 다양한 정보 비교하고 출처 확인하는 습관 필요하다.',
+    '대화에서 상대방 말을 주의 깊게 듣는 것은 매우 중요하다. 경청은 상대방 존중하는 가장 기본적인 방법이다.',
+    '혼자 밥을 먹으면서 외로움을 느끼는 사람들 있다. 혼밥 식당은 이러한 사람들에게 편안한 공간 제공한다.',
+    '전통 문화를 지키려는 노력 활발해지고 있다. 그러나 젊은 세대 참여가 더 필요하고 있다.',
   ],
   data_description: [
-    '자료에 따르면 해당 수치는 지속적으로 변화하고 있다. 처음에는 큰 폭으로 증가하였으나, 시간이 지나면서 증가율이 점차 낮아지는 추세를 보인다. 이러한 변화는 시장이 성숙 단계에 진입하고 있음을 나타낸다. 따라서 새로운 정책이나 전략이 필요할 것으로 보인다.',
-    '제시된 자료를 분석하면 주목할 만한 변화가 나타나고 있다. 초기에는 뚜렷한 증가세를 보였으나, 최근에는 그 폭이 줄어들고 있다. 이러한 현상은 관련 분야의 구조적 변화와 관련이 있을 수 있다. 향후 지속적인 모니터링이 필요하다.',
+    '자료에 따르면 해당 수치가 지속적으로 변화하고 있다. 처음에는 큰 폭으로 증가하였으나, 시간을 지나면서 증가율이 점차 낮아지는 추세를 보인다. 이러한 변화는 시장이 성숙 단계에 진입하고 있다는 것을 나타낸다. 따라서 새로운 정책이나 전략이 필요할 것으로 보인다.',
+    '제시된 자료를 분석하면 주목할 만한 변화가 나타나고 있다. 초기에는 뚜렷한 증가세를 보였으나, 최근에는 그 폭이 줄어들고 있다. 이러한 현상은 관련 분야 구조적 변화와 관련이 있을 수 있다. 향후 지속적인 모니터링이 필요하다.',
   ],
   essay: [
-    '현대 사회에서 협력의 중요성은 점점 커지고 있다. 혼자서는 해결하기 어려운 문제도 여러 사람이 함께하면 풀 수 있는 경우가 많다. 예를 들어 학교에서 팀 프로젝트를 할 때 각자의 잘하는 역할을 나누면 효율적으로 결과물을 만들 수 있다. 또한 서로의 부족한 부분을 채워줄 수 있어 성장하는 데도 도움이 된다.\n\n그러나 협력 과정에서 어려움도 발생한다. 가장 큰 문제는 의견 충돌이다. 서로 다른 관점을 가진 사람들이 하나의 결과물을 만들어야 하기 때문에 갈등이 생기기 쉽다. 또한 누군가가 소홀히 하면 다른 팀원들의 부담이 커지게 된다.\n\n이러한 문제를 해결하기 위해서는 서로 존중하고 경청하는 태도가 필요하다. 자신만의 주장보다 팀 전체의 목표를 생각하는 마음가짐이 중요하다. 또한 맡은 일은 성실하게 수행하고 정해진 기한을 지키는 것이 바람직하다. 이러한 노력이 쌓이면 원활한 협력이 가능해질 것이다.',
+    '현대 사회에서 협력 중요성 점점 커지고 있다. 혼자서 해결하기 어려운 문제도 여러 사람 함께 하면 풀 수 있는 경우가 많다. 예를 들어 학교 팀 프로젝트 할 때 각자 잘하는 역할을 나누면 효율적으로 결과물을 만들 수 있다. 또한 서로 부족한 부분을 채울 수 있어 성장하는 데도 도움이 된다.\n\n그러나 협력 과정에서 어려움도 발생한다. 가장 큰 문제는 의견 충돌이다. 서로 다른 관점을 가진 사람들이 하나의 결과물을 만들어야 하기 때문에 갈등이 생기기 쉽다. 또한 누군가가 소홀히 하면 다른 팀원들의 부담이 커지게 된다.\n\n이러한 문제를 해결하기 위해서 서로 존중하고 경청하는 태도가 필요하다. 자신만의 주장보다 팀 전체의 목표 생각하는 마음가짐이 중요하다. 또한 맡은 일은 성실하게 수행하고 정해진 기한을 지키는 것이 바람직하다.',
   ],
 };
 
-// 규칙 기반 피드백 생성
+// 중국 화자 오류 패턴 기반 피드백 생성
 export function generateMockFeedback(content: string, type: string): FeedbackResult {
   const feedback: FeedbackResult = {
     autoCorrections: [],
@@ -216,21 +216,23 @@ export function generateMockFeedback(content: string, type: string): FeedbackRes
     overallScore: 75,
   };
 
-  // 자동 수정 규칙
-  const autoRules: Array<{ pattern: RegExp; original: string; corrected: string }> = [
-    { pattern: /좋아합니다/g, original: '좋아합니다', corrected: '좋아해요' },
-    { pattern: /합니다/g, original: '합니다', corrected: '해요' },
-    { pattern: /배웁니다/g, original: '배웁니다', corrected: '배워요' },
-    { pattern: /있습니다/g, original: '있습니다', corrected: '있어요' },
-    { pattern: /습니다/g, original: '습니다', corrected: '어요' },
-    { pattern: /去了/g, original: '去了', corrected: '갔습니다' },
+  // ── 자동 수정 규칙 (중국 화자 공통) ──
+  const autoRules: Array<{ pattern: RegExp; corrected: string }> = [
+    // 조사 생략: "중요성 커지고 있다" → "중요성이 커지고 있다"
+    { pattern: /의 중요성/g, corrected: '의 중요성이' },
+    // 어순 오류: "공간 제공한다" → "공간을 제공한다"
+    { pattern: /공간 (제|제공)/g, corrected: '공간을 $1' },
+    // 조사 누락: "방법 필요하다" → "방법이 필요하다"
+    { pattern: /방법 (필요|있|없)/g, corrected: '방법이 $1' },
+    // 목적격 조사 누락: "역할 나누면" → "역할을 나누면"
+    { pattern: /역할 나누/g, corrected: '역할을 나누' },
   ];
 
   autoRules.forEach((rule) => {
     const match = content.match(rule.pattern);
     if (match) {
       feedback.autoCorrections.push({
-        original: rule.original,
+        original: match[0],
         corrected: rule.corrected,
         position: {
           start: content.indexOf(match[0]),
@@ -240,34 +242,76 @@ export function generateMockFeedback(content: string, type: string): FeedbackRes
     }
   });
 
-  // 문법 오류 검사
+  // ── 중국 화자 문법 오류 검사 ──
   const grammarRules: Array<{
     pattern: RegExp;
     type: string;
     explanation: string;
     suggestion: string;
-    corrected: string;
+    corrected?: string;
   }> = [
+    // 1. 조사 생략 (중국 화자 최다 오류)
     {
       pattern: /이\s+것/g,
-      type: '띄어쓰기',
-      explanation: '"이것"은 붙여 써야 합니다. "이 것"은 잘못된 표기입니다.',
-      suggestion: '"이것"으로 바꿔주세요.',
+      type: '조사/띄어쓰기',
+      explanation: '중국어 화자가 자주 틀리는 표현입니다. "이것"은 한 단어로 붙여 써야 합니다.',
+      suggestion: '"이것"으로 붙여 쓰세요.',
       corrected: '이것',
     },
     {
-      pattern: /저는.*좋아합니다/g,
-      type: '어조 일치',
-      explanation: '구어체 문장에서는 "-합니다"보다 "-해요" 체가 더 자연스럽습니다.',
-      suggestion: '"좋아해요"로 바꿔주세요.',
-      corrected: '좋아해요',
+      pattern: /사람들\s+있다/g,
+      type: '조사 생략',
+      explanation: '중국어에는 조사 개념이 없어 한국어 조사(이/가, 을/를, 은/는)를 자주 생략합니다. "사람들이 있다"처럼 주격 조사 "이"가 필요합니다.',
+      suggestion: '"사람들이 있다"로 고쳐주세요.',
+      corrected: '사람들이 있다',
     },
     {
-      pattern: /것이다\./g,
-      type: '문체',
-      explanation: '문어체 종결 표현입니다. 글의 나머지 문체와 일치시키세요.',
-      suggestion: '글의 문체(해요체/합쇼체)에 맞추어 종결하세요.',
-      corrected: '',
+      pattern: /협력 중요성/g,
+      type: '조사 생략',
+      explanation: '"협력의 중요성"처럼 관형격 조사 "의"가 필요합니다. 중국어는 "的" 하나로 처리하지만 한국어는 조사가 필수입니다.',
+      suggestion: '"협력의 중요성"으로 고쳐주세요.',
+      corrected: '협력의 중요성',
+    },
+    {
+      pattern: /모니터링\s+필요/g,
+      type: '조사 생략',
+      explanation: '중국 화자가 자주 하는 실수입니다. 한국어는 "모니터링이 필요하다"처럼 주격 조사 "이/가"가 필요합니다.',
+      suggestion: '"모니터링이 필요하다"로 고쳐주세요.',
+      corrected: '모니터링이 필요',
+    },
+    {
+      pattern: /데\s+도움이\s+된다/g,
+      type: '조사 오용',
+      explanation: '"~하는 데 도움이 된다"에서 "데"는 의존 명사로 띄어 써야 합니다. 중국어 화자는 "~는데"와 혼동하기 쉽습니다.',
+      suggestion: '"~하는 데"로 띄어 쓰세요.',
+    },
+    {
+      pattern: /때문/g,
+      type: '조사 누락',
+      explanation: '"~기 때문이다"에서 "때문" 앞에 "이"가 필요합니다. 중국어 화자는 본용언만 쓰는 경향이 있습니다.',
+      suggestion: '"때문이다"가 아닌 "때문이다" 전체 문맥을 확인하세요.',
+    },
+    {
+      pattern: /참여가\s+더\s+필요하고\s+있다/g,
+      type: '어미 오류',
+      explanation: '"필요하고 있다"는 어색한 표현입니다. 중국어 화자가 자주 하는 오류로, "~고 있다"는 진행형에만 사용합니다.',
+      suggestion: '"참여가 더 필요하다"로 고쳐주세요.',
+      corrected: '참여가 더 필요하다',
+    },
+    // 2. 받침/연음 관련
+    {
+      pattern: /갈등이\s+생기기/g,
+      type: '어미 선택',
+      explanation: '"갈등이 생기다"보다 "갈등이 발생하다"가 더 자연스럽습니다. 중국어 화자는 직접 번역으로 인해 어색한 동사를 선택하는 경우가 많습니다.',
+      suggestion: '"갈등이 발생하기"로 바꿔보세요.',
+    },
+    // 3. 중국어 직역체
+    {
+      pattern: /해결하기\s+위해서/g,
+      type: '중국어 직역체',
+      explanation: '"为了解决"의 직역입니다. 한국어에서는 "해결하려면"이 더 자연스럽습니다.',
+      suggestion: '"해결하려면"으로 바꿔주세요.',
+      corrected: '해결하려면',
     },
   ];
 
@@ -286,12 +330,35 @@ export function generateMockFeedback(content: string, type: string): FeedbackRes
     }
   });
 
-  // 맥락/흐름 검사
+  // ── 추가 문법 검사: 조사 누락 패턴 ──
+  // 중국어 화자는 종종 필수 조사를 생략함
+  const missingParticlePatterns: Array<{ regex: RegExp; desc: string; suggest: string }> = [
+    { regex: /[가-힣]{2,}\s+필요/g, desc: '주격 조사 "이/가"가 누락되었습니다.', suggest: '"~이 필요하다"로 고쳐주세요.' },
+    { regex: /[가-힣]{2,}\s+중요/g, desc: '주격 조사 "이/가"가 누락되었습니다.', suggest: '"~이 중요하다"로 고쳐주세요.' },
+    { regex: /[가-힣]{2,}\s+가능/g, desc: '주격 조사 "이/가"가 누락되었습니다.', suggest: '"~이 가능하다"로 고쳐주세요.' },
+  ];
+
+  missingParticlePatterns.forEach((p) => {
+    const match = content.match(p.regex);
+    if (match && !feedback.grammarErrors.some((e) => e.original === match[0])) {
+      feedback.grammarErrors.push({
+        id: `g${feedback.grammarErrors.length}`,
+        original: match[0],
+        corrected: '',
+        type: '조사 생략 (중국어 영향)',
+        explanation: p.desc + ' 중국어는 "很需要/很重要"처럼 조사 없이 직결되지만, 한국어는 조사가 반드시 필요합니다.',
+        suggestion: p.suggest,
+        position: { start: content.indexOf(match[0]), end: content.indexOf(match[0]) + match[0].length },
+      });
+    }
+  });
+
+  // ── 맥락/흐름 검사 ──
   if (type === 'essay' && content.length < 400) {
     feedback.contextIssues.push({
       type: 'length',
-      description: '논설문 답변이 400자 미만으로, 600~700자 요건을 충족하지 못합니다.',
-      suggestion: '구체적인 예시와 근거를 추가하여 분량을 늘려주세요.',
+      description: '논설문 답변이 400자 미만으로, 600~700자 요건을 충족하지 못합니다. 중국 화자는 간결한 표현을 선호하지만 한국어 논설문은 충분한 분량이 필요합니다.',
+      suggestion: '구체적인 예시와 근거를 추가하여 분량을 늘려주세요. 각 문단에 "예를 들어", "또한" 등을 활용해 보세요.',
       affectedText: '',
     });
   }
@@ -299,28 +366,30 @@ export function generateMockFeedback(content: string, type: string): FeedbackRes
   if (type === 'data_description' && content.length < 150) {
     feedback.contextIssues.push({
       type: 'length',
-      description: '자료 설명 답변이 150자 미만으로, 200~300자 요건을 충족하지 못합니다.',
+      description: '자료 설명 답변이 150자 미만입니다.',
       suggestion: '자료의 주요 특징과 변화 추세를 더 자세히 서술해주세요.',
       affectedText: '',
     });
   }
 
-  if (content.length > 150) {
-    const transitions = ['그러나', '하지만', '그래서', '또한', '예를 들어', '따라서', '반면', '즉'];
+  if (content.length > 100) {
+    const transitions = ['그러나', '하지만', '그래서', '또한', '예를 들어', '따라서', '반면', '즉', '먼저', '첫째', '둘째'];
     const hasTransition = transitions.some((w) => content.includes(w));
     if (!hasTransition) {
       feedback.contextIssues.push({
         type: 'transition',
-        description: '접속사나 전환 표현이 부족합니다.',
-        suggestion: '"그러나", "하지만", "그래서", "예를 들어" 등의 표현을 사용하여 문장 간 연결을 강화하세요.',
+        description: '접속사나 전환 표현이 부족합니다. 중국어는 문맥으로 연결하지만 한국어는 접속사가 중요한 역할을 합니다.',
+        suggestion: '"그러나", "또한", "예를 들어", "첫째/둘째" 등의 표현을 사용하여 문장 간 연결을 강화하세요.',
         affectedText: '',
       });
     }
   }
 
-  // 점수 계산
-  const deduction = feedback.grammarErrors.length * 3 + feedback.contextIssues.length * 5;
-  feedback.overallScore = Math.max(40, 85 - deduction);
+  // ── 점수 계산 ──
+  const deduction = feedback.grammarErrors.length * 4 + feedback.contextIssues.length * 5;
+  feedback.overallScore = Math.max(30, 90 - deduction);
 
   return feedback;
 }
+
+export const CHINESE_SPEAKER_NATIONALITY = 'china';
