@@ -58,6 +58,20 @@ Next 16 에서 감싸지 않으면 빌드가 실패한다.
 Render 설정: Build `npm install && npm run build` · Start `npm start`
 (`vercel.json` 은 Vercel 잔재이며 Render 는 무시한다)
 
+## 제품 방향 — 이미 판단이 끝난 것
+
+`PRD.md` Phase 3 로드맵 참조. 다시 논의하지 않아도 되는 결정들:
+
+- **자동 채점은 하이브리드(C)로 간다** — 자질 기반으로 등급, LLM 은 피드백 문구만.
+  LLM 단독 채점은 완전일치 53~68%, 일관성 불안정이 문헌으로 확인됐다
+  ([안현수 2025 정리](../research/ahn2025-lexical-features.md))
+- **사진 OCR 입력은 기각** — 완전일치 32%. 검증 완료([topik-ocr-poc](../topik-ocr-poc/README.md))
+- **태블릿·터치 필기 입력은 미검증이며 유망** — 획 정보가 있어 사진 OCR 보다 유리
+- **자질 기반 87.9% 를 목표치로 쓰지 않는다** — 그것은 숙달도 3분류이고
+  우리는 점수 채점이 필요하다. 다른 과제다
+
+> 반복되는 교훈: **구현보다 검증이 오래 걸린다.** OCR PoC 에서 확인했고 채점도 같을 것이다.
+
 ## 알려진 한계 (의도된 것)
 
 - `user_id` 가 `'test-user'` 하드코딩 → 기록이 전역 공유된다. Supabase Auth 도입은 Phase 3.
